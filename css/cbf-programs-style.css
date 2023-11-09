@@ -22,7 +22,8 @@ div#landing_content {
 	position: relative;
 	width: 38vw;
 	margin: 25vh auto;
-	font-family: Montserrat, sans-serif;
+	font-family: Work Sans, sans-serif;
+	font-weight: 300;
 }
 
 #landing_text a:hover, .offcanvas a:focus{
@@ -31,7 +32,7 @@ div#landing_content {
 }
 
 #landing_text a:link, a:visited {
-	color: #F15C22;
+	color: #418FDE;
 	text-decoration: none;
 }
 
@@ -45,7 +46,7 @@ div#landing_content {
 #landing_content .button {
 	border: 2px #41B6E6;
 	color:white;
-	background:#F15C22;
+	background:#418FDE;
 	padding:6px 12px;
 	font-weight: 500;
 }
@@ -86,9 +87,9 @@ span.attribute {
 .attribute a {
     /*padding: 8px 8px 8px 32px;*/
     text-decoration: none;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: 'Work Sans', sans-serif;
     font-size: 12px;
-    color: #ee5e2a;
+    color: #418FDE;
     transition: 0.3s
 }
 
@@ -134,14 +135,14 @@ select {
 	font-weight: normal;
 	text-decoration: none;
 	overflow: hidden; /*planning ahead to clear floats*/
-	font-family: "Montserrat", helvetica, arial, sans-serif;
+	font-family: "Work Sans", helvetica, arial, sans-serif;
 	text-align: left;
 }
 
 .legend {
 	padding: 10px;
 	z-index: 1;
-	font-family: "Montserrat", helvetica, arial, sans-serif;
+	font-family: "Work Sans", helvetica, arial, sans-serif;
 	width: 240px;
 	margin: 10px auto;
 }
@@ -168,7 +169,7 @@ select {
 	right:0;
   text-align: left;
   margin-bottom: 5px;
-	font-family: "Montserrat", helvetica, arial, sans-serif;
+	font-family: "Work Sans", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 90%;
   color: #2C2A29;
@@ -202,13 +203,40 @@ ul{
 	font-size:
 }
 
+#console {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 240px;
+  min-height: 100%;
+  margin: 0px;
+  background-color: white;
+}
+
+.console-content {
+  flex-grow: 1;
+  margin: 0px;
+  background-color: white;
+}
+
+.console-item {
+  padding: 10px 20px;
+}
+
+
+.style-logo {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  display: block;
+}
+
 .legend-title {
 	position:relative;
 	bottom:0;
 	right:0;
     text-align: left;
     margin-bottom: 5px;
-	font-family: "Montserrat", helvetica, arial, sans-serif;
+	font-family: "Work Sans", helvetica, arial, sans-serif;
     font-weight: 700;
 	color:#2C2A29;
     font-size: 90%;
@@ -235,6 +263,7 @@ ul{
     width: 24px;
     margin-right: 5px;
     margin-left: 0px;
+	margin-top: 3px;
     border: 0px solid #999;
     }
   .legend ul.legend-labels li ul { /* to indent nested lists in the legend */
@@ -247,7 +276,7 @@ ul{
 
 #raising_blended_learners
 {
-	background:url(../markers/raising_blended_learners_campuses.svg) left center;
+	background:url(../markers/raising_blended_learners_eye_2023.svg) left center;
 	width:28px;
 	height:12px;
 	display: block;
@@ -255,15 +284,15 @@ ul{
 }
 #raising_blended_learners_campuses
 {
-	background:url(../markers/raising_blended_learners_campuses_eye_circle.svg) left center;
+	background:url(../markers/raising_blended_learners_eye_2023.svg) left center;
 	width:28px;
-	height:12px;
+	height:14px;
 	display: block;
 	float: left;
 }
 #charles_butt_scholars
 {
-	background:url(../markers/charles_butt_scholars_eye_circle.svg) left center;
+	background:url(../markers/charles_butt_scholars_eye_2023.svg) left center;
 	width:28px;
 	height:14px;
 	display: block;
@@ -280,7 +309,7 @@ ul{
 }
 #raising_texas_teachers
 {
-	background:url(../markers/raising_texas_teachers_eye_circle.svg) left center;
+	background:url(../markers/raising_texas_teachers_eye_2023.svg) left center;
 	width:28px;
 	height:14px;
 	display: block;
@@ -288,7 +317,7 @@ ul{
 }
 #raising_texas_teachers_icon
 {
-	background:url(../markers/raising_texas_teachers_circle.svg) left center;
+	background:url(../markers/raising_texas_teachers_eye_2023.svg) left center;
 	width:14px;
 	height:14px;
 	display: block;
@@ -297,7 +326,7 @@ ul{
 }
 #raising_school_leaders
 {
-	background:url(../markers/raising_school_leaders_eye_circle.svg) left center;
+	background:url(../markers/raising_school_leaders_eye_2023.svg) left center;
 	width:28px;
 	height:14px;
 	display: block;
@@ -464,7 +493,7 @@ p.moreinfo  {
   padding: 8px 48px 8px 32px;
   background: #ffff;
   color:#4a4a4a;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size:14px;
  /* width:auto !important;*/
 }
@@ -474,7 +503,7 @@ p.districtswitcher, p.zoomoutlink  {
   padding: 0px 8px 0px 32px;
   background: #ffff;
   color:#4a4a4a;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-weight:500;
   font-size:14px;
  /* width:auto !important;*/
@@ -497,7 +526,7 @@ p.programs  {
   padding: 8px 8px 8px 32px;
   background: #ffff;
   color:#4a4a4a;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size:10px;
  /* width:auto !important;*/
 }
@@ -505,9 +534,9 @@ p.programs  {
  .sidenav .programlink {
     /*padding: 8px 8px 8px 32px;*/
     text-decoration: none;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: 'Work Sans', sans-serif;
     font-size: 10px;
-    color: #ee5e2a;
+    color: #418FDE;
     transition: 0.3s
 }
 
@@ -523,9 +552,9 @@ p.programs  {
  .content .programlink {
     /*padding: 8px 8px 8px 32px;*/
     text-decoration: none;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: 'Work Sans', sans-serif;
     font-size: 10px;
-    color: #ee5e2a;
+    color: #418FDE;
     transition: 0.3s
 }
 
@@ -536,18 +565,18 @@ p.programs  {
 .sidenav a {
     /*padding: 8px 8px 8px 32px;*/
     text-decoration: none;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: 'Work Sans', sans-serif;
     font-size: 14px;
-    color: #ee5e2a;
+    color: #418FDE;
     transition: 0.3s
 }
 
 .content a {
     /*padding: 8px 8px 8px 32px;*/
     text-decoration: none;
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: 'Work Sans', sans-serif;
     font-size: 14px;
-    color: #ee5e2a;
+    color: #418FDE;
     transition: 0.3s
 }
 
@@ -566,7 +595,7 @@ p.programs  {
 #about {
 	/*transition: margin-left .5s;
     padding: 16px;*/
-	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	font-family: 'Work Sans', sans-serif;
 	font-weight: 700;
 	color: #ffff;
 	filter: alpha(opacity = 0);
@@ -576,7 +605,7 @@ p.programs  {
 	top:20px;
     display:block;
     z-index:2;
-    background:#ee5e2a;
+    background:#418FDE;
 	overflow: auto;
 }
 
@@ -620,7 +649,7 @@ button.collapsible  {
   padding: 8px 8px 8px 32px;
   background: #ffff;
   color:#F15C22;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size:12px;
  /* width:auto !important;*/
   }

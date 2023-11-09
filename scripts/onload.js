@@ -1,4 +1,5 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiY29yZS1naXMiLCJhIjoiaUxqQS1zQSJ9.mDT5nb8l_dWIHzbnOTebcQ';
+// this is the cbf-programs-map token from the CBF Mapbox account
+mapboxgl.accessToken = 'pk.eyJ1Ijoid2ViLWNoYXJsZXNidXR0ZmRuIiwiYSI6ImNsb3FlMWM1eDBnM3UyanBzb3V3MzNxc3cifQ._PujXINObg5VlQm7Yi10rA';
 
 //set bounds to Texas
 var bounds = [
@@ -13,7 +14,7 @@ if (!urlParams["districts"]) {
 
 var map = new mapboxgl.Map({
 	container: 'map', // container id
-	style: 'mapbox://styles/core-gis/ckq137o0x11su18qzogi3e52t', // stylesheet location; this is the v2.3.1 style with markers turned OFF
+	style: 'mapbox://styles/web-charlesbuttfdn/cloqecrs0003i01rcc34e7tvx', // CBF stylesheet location; this is the v2.3.1 style with markers turned OFF
 	center: [-99.228516, 31.203405], // starting position [lng, lat]
 	zoom: 5.5, // starting zoom
 	maxBounds: bounds // sets bounds as max
@@ -117,7 +118,7 @@ map.on('load', function () {
 			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vThQIAx3AYYtRLgKzCfodIThk1_YqZmFCVSCLATbozYnbVi_hTaoIU3eDDxP6L9-3ofkELApw4L_2sk/pub?gid=1352187007&single=true&output=tsv",
 			'sourceName': 'raising-school-leaders',
 			'layerName': 'raising-school-leaders-points',
-			'circleColor': '#41B6E6',
+			'circleColor': '#418FDE',
 			'circleRadius': 4,
 			'legendID': 'raising_school_leaders',
 			'visibleOnLoad': true,
@@ -133,7 +134,7 @@ map.on('load', function () {
 			'layerName': 'raising-blended-learners-campuses-points', // layer name, used internally
 			// 'icon': 'raising_blended_learners_campuses_large', // to make this an icon layer, use this property for the icon image name, using the name from Mapbox
 			// 'iconSize': 0.1, // a size multiplier for the icon, which should be saved at 1/x times the intended initial display size, so that when it gets scaled up on zooming in it will still look good
-			'circleColor': '#FDB500', // to get a circle layer, use this property specifying the colour
+			'circleColor': '#AB2328', // to get a circle layer, use this property specifying the colour
 			'circleRadius': 4,
 			'legendID': 'raising_blended_learners_campuses', // OPTIONAL: the id in the legend, so we can set it to active or inactive as appropriate. Simply leave out for layers that don't appear in the legend
 			'scalingFactor': 25, // OPTIONAL: how much to magnify the markers by when zooming in.  Defaults to 25 if not specified; set to 1 to have no zoom at all.
@@ -147,7 +148,7 @@ map.on('load', function () {
 			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbKunE8ofTAowmbXsNosyx4Hi7aHdSGwrWV5YQmcuxuhOHnBfYmir5VVA5C8VqFCDMjqAw3I9e5Im/pub?gid=697505768&single=true&output=tsv",
 			'sourceName': 'charles-butt-scholars',
 			'layerName': 'charles-butt-scholars-points',
-			'circleColor': '#F15C22',
+			'circleColor': '#00B2A9',
 			'circleRadius': 4,
 			'legendID': 'charles_butt_scholars',
 			'visibleOnLoad': true
@@ -160,7 +161,7 @@ map.on('load', function () {
 			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vQchMpQoBdYmzqkNASTNdXIf6cmDbYm3K_rdcNGrp1-KCcT9N97h5CjhvhCrgj6gky6uSQra-4FZtuV/pub?gid=956631515&single=true&output=tsv",
 			'sourceName': 'raising-texas-teachers',
 			'layerName': 'raising-texas-teachers-points',
-			'circleColor': '#99401b',
+			'circleColor': '#E57410',
 			'circleRadius': 4,
 			'legendID': 'raising_texas_teachers',
 			'visibleOnLoad': true
@@ -318,7 +319,7 @@ function fillpopup_rbl(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += '<br /><span class="attribute"><a href="https://www.raiseyourhandtexas.org/foundation/blended/blended-site-visits/">Request a site visit</a></span>';
+		html += '<br /><span class="attribute"><a href="https://charlesbuttfdn.org//foundation/blended/blended-site-visits/">Request a site visit</a></span>';
 		html += "<hr class='divider'/>";
 	}
 	return html;
