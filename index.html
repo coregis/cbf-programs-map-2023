@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <!--
 	WHERE THINGS ARE DEFINED IN THIS FILE:
@@ -27,183 +27,175 @@
 		<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,700&family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
 		<link href="css/cbf-programs-style.css" rel="stylesheet" />
-		<style>
-			body { margin:0; padding:0; }
-			#map { position:absolute; top:0; bottom:0; width:100%; }
-			.mapboxgl-popup {
-				max-width: 400px;
-				font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-			}
-		</style>
 
 <!-- load functions & object definitions that we'll call later -->
-		<script src='scripts/functions.js'></script>
+		<script src="scripts/functions.js?v=0.1"></script>
+	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+</head>
 
-	</head>
-
-	<body>
-
-	<!--LANDING PAGE -->
-		<div id='landing' onClick='this.style.opacity = 0; this.style.visibility = "hidden";'>
-			<div id='landing_content'>
-				<p id='landing_text'>
-					<b>Get Started With the Charles Butt Foundation Programs Map</b>
-					<br>
-					<br>
-					<b>Map:</b> Visualize the growth of Charles Butt Foundation Programs (Raising Blended Learners, Raising School Leaders, and Raising Texas Teachers: University Partners and Charles Butt Scholars) from 2008 to the present.
-					<br>
-					<br>
-					<b>Interaction:</b> In the sidebar on the left hand side, click the Play, Stop, Skip Forward, or Skip Backward buttons to explore the reach of our programs across the state of Texas. You can toggle viewing or hiding each Program, and view by House, Senate, or School District.  
-					<br>
-					<br>
-					Finally, you can click on each dot to learn more about a particular program, partnership, or recipient.
-					Click the orange button below to explore the programs.
-					<br>
-					<br>
-					<i>The Charles Butt Foundation Programs Map is a data visualization platform developed by <a href="https://www.coregis.net">Core GIS</a>.</i>
-				</p>
-				<br />
-				<span class='button'>Start Exploring! &nbsp;➔</span>
-			</div>
-		</div> <!-- id='landing' -->
-
-	<!--BEGIN FLYOUT FOR 'ZOOM TO LAYERS'-->
-
-		<div id="mySidenav" class="sidenav">
-			<p>
-				<br />
+<body class="no-scroll">
+  <div class="container">
+<!--LANDING PAGE -->
+	<div id='landing' onClick='this.style.opacity = 0; this.style.visibility = "hidden";'>
+		<div id='landing_content'>
+			<p id='landing_text'>
+				<b>Get Started With the Charles Butt Foundation Programs Map</b>
+				<br>
+				<br>
+				<b>Map:</b> Visualize the growth of Charles Butt Foundation Programs (Raising Blended Learners, Raising School Leaders, and Raising Texas Teachers: University Partners and Charles Butt Scholars) from 2008 to the present.
+				<br>
+				<br>
+				<b>Interaction:</b> In the sidebar on the left hand side, click the Play, Stop, Skip Forward, or Skip Backward buttons to explore the reach of our programs across the state of Texas. You can toggle viewing or hiding each Program, and view by House, Senate, or School District.  
+				<br>
+				<br>
+				Finally, you can click on each dot to learn more about a particular program, partnership, or recipient.
+				Click the orange button below to explore the programs.
+				<br>
+				<br>
+				<i>The Charles Butt Foundation Programs Map is a data visualization platform developed by <a href="https://www.coregis.net">Core GIS</a>.</i>
 			</p>
+			<br />
+			<span class='button'>Start Exploring! &nbsp;➔</span>
+		</div>
+	</div> <!-- id='landing' -->
 
-				<div class='legend'>
-				<div class='legend-title'>Click below to toggle visibility</div>
-				<div class='legend-scale'>
-					<ul class='legend-labels'>
-						<li onClick="showHideLayer('charles-butt-scholars-points', markerNames=['charles_butt_scholars', 'charles_butt_scholars_icon']);" style="cursor: pointer;"><span id="charles_butt_scholars"></span>Charles Butt Scholars</li>
-						<li onClick="showHideLayer('raising-blended-learners-campuses-points', markerNames=['raising_blended_learners_campuses']);" style="cursor: pointer;"><span id="raising_blended_learners_campuses"></span>Raising Blended Learners (Districts)</li>
-						<li onClick="showHideLayer('raising-school-leaders-points', markerNames=['raising_school_leaders']);" style="cursor: pointer;"><span id="raising_school_leaders"></span>Raising School Leaders Participants</li>
-						<li onClick="showHideLayer('raising-texas-teachers-points', markerNames=['raising_texas_teachers', 'raising_texas_teachers_icon']);" style="cursor: pointer;"><nobr><span id="raising_texas_teachers"></span>Raising Texas Teachers:<br />(University Partners)</nobr></li>
-						<li id="house_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-house-districts-lines', markerNames=['state_house_districts']);" style="cursor: pointer !important;"><span id="state_house_districts" class="inactive"></span>School District Boundaries</li>
-						<li id="senate_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-senate-districts-lines', markerNames=['state_senate_districts']);" style="cursor: pointer !important;"><span id="state_senate_districts" class="inactive"></span>Education Service Center Boundaries</li>
-						<li id="school_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-school-districts-lines', markerNames=['state_school_districts']);" style="cursor: pointer !important;"><span id="state_school_districts" class="inactive"></span>State School Districts</li>
-						<li onClick="showHideAlumni(showOnly=true);" style="cursor: pointer;"><span id="alumni_markers"></span>Alumni & active in current year</li>
-						<li onClick="showHideAlumni(showOnly=false, hideOnly=true);" style="cursor: pointer;"><span id="active_markers" class="inactive"></span>Active in current year only</li>
-					</ul>
-				</div> <!-- end of div class='legend-scale' -->
-
-				<p class="moreinfo">
-				Use the drop-down menus below to zoom to a <span id="house-district-reference">House</span><span id="senate-district-reference">Senate</span><span id="school-district-reference">School</span> District of your choice.		
-				</p>
-					
-				<!--Drop down controls-->
-
-				<select id="house-districts-control" onchange="zoomToPolygon('state-house-districts', this.value, 'house_dist');"></select>
-				<select id="senate-districts-control" onchange="zoomToPolygon('state-senate-districts', this.value, 'senate_dist');"></select>
-				<select id="school-districts-control" onchange="zoomToPolygon('state-school-districts', this.value, 'NAME');"></select>
-
-				<!-- House/Senate districts switcher -->
-
-				<p onClick="zoomToPolygon('', '-108,25,-88,37,0', '');" class="zoomoutlink"><span id="texas_icon" style="cursor:pointer"></span>Show whole state
-				</p>
-
-				<p id="switch-from-house-districts" class="districtswitcher">
-					<input type="radio" checked="true">
-						<span class="checkmark"></span>Texas <b>House</b> Districts.
-
-					<br />
-
-					<a href="index.html?districts=senate"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=senate'; return false;"/>
-						<span class="checkmark"></span>Texas <b>Senate</b> Districts.</a>
-
-					<br />
-
-					<a href="index.html?districts=isd"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=isd'; return false;"/>
-						<span class="checkmark"></span>Texas <b>School</b> Districts.</a>
-				</p>
-
-				<p id="switch-from-senate-districts" class="districtswitcher">
-					<a href="index.html?districts=house"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=house'; return false;"/>
-						<span class="checkmark"></span>Texas <b>House</b> Districts.</a>
-
-					<br />
-
-					<input type="radio" checked="true">
-						<span class="checkmark"></span>Texas <b>Senate</b> Districts.
-
-					<br />
-
-					<a href="index.html?districts=isd"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=isd'; return false;"/>
-						<span class="checkmark"></span>Texas <b>School</b> Districts.</a>
-				</p>
-
-				<p id="switch-from-school-districts" class="districtswitcher">
-					<a href="index.html?districts=house"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=house'; return false;"/>
-						<span class="checkmark"></span>Texas <b>House</b> Districts.</a>
-
-					<br />
-
-					<a href="index.html?districts=senate"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=senate'; return false;"/>
-						<span class="checkmark"></span>Texas <b>Senate</b> Districts.</a>
-
-					<br />
-
-					<input type="radio" checked="true">
-						<span class="checkmark"></span>Texas <b>School</b> Districts.
-				</p>
-
-
-<!--create time slider-->
-				<div class='session' id='sliderbar'>
-					Year: <label id='active-year'></label><br />
-					<input id='slider' class='row' type='range' min='2008' max='2021' step='1' value='2008' onmouseup="moveYearSlider('slider', 'active-year', 0);" />
-				</div>
-				<div id='slidercontrols'>
-					<span id='slider_back' onclick="moveYearSlider('slider', 'active-year', -1);" title='Go back one year'><img src="images/skip_backward.svg"></span>
-					<span id='slider_play' onclick="startYearAnimation('slider', 'active-year', 1000, 'slider_play', 'slider_stop');" title='Animate timeline'><img src="images/play.svg"></span>
-					<span id='slider_stop' onclick="stopYearAnimation('slider_play', 'slider_stop');" title='Stop animation'><img src="images/stop.svg"></span>
-					<span id='slider_forward' onclick="moveYearSlider('slider', 'active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
-				</div> <!-- id='slidercontrols' -->
-
-				<div class='legend-source'>Source: <a href="https://www.raiseyourhandtexas.org/" target="_blank">Charles Butt Foundation</a></div>
-				<div class='map-credit'>Map design by <a href="http://www.coregis.net/" target="_blank">CORE GIS</a></div>
-			</div> <!-- end of div id="legend" -->
-		</div> <!-- end of div id="mySidenav" class="sidenav" -->
-
-			<div id="console">
-				<img class="style-logo" src="images/cbf_logo_curved_bottom.png" alt="Charles Butt Foundation Logo">
-			</div>
-
-		<!--END FLYOUT FOR 'ZOOM TO LAYERS'-->
-
-		<!--BEGIN SUMMARY STATS APPEAR/DISAPPEAR WINDOW
-				This bit of code creates the temporary window that appears above the legend
-				and displays the summary stats for the selected district-->
-
-			<div class='stats' id='statsBox'>
-				<div class='stats-title'>
-					Active Programs in
-					<br />
-					<span class="select" id="stats.districtType"></span> <span class="select" id="stats.districtName"></span>
-					<br />
-					In <span class="select" id="stats.year"></span>
-				</div>
-				<div class='stats-scale'>
-					<ul class='stats-labels'>
-<!-- for maintenance: always make the id of these = count.layerName because that's what the updateStatsBox() function looks for -->
-						<li>Raising Blended Learners:  <span class="count.rbl" id="count.raising-blended-learners-campuses-points"></span></li>
-						<li>Charles Butt Scholars: <span class="count.cbs" id="count.charles-butt-scholars-points"></span></li>
-						<li>Partner Universities: <span class="count.ihe" id="count.raising-texas-teachers-points"></span></li>
-						<li>Raising School Leaders: <span class="count.rsl" id="count.raising-school-leaders-points"></span></li>
-					</ul>
-				</div> <!-- end of div class='stats-scale' -->
-			</div>
-
-		<!--END SUMMARY STATS APPEAR/DISAPPER WINDOW-->
+<!--BEGIN CONSOLE FOR 'ZOOM TO LAYERS'-->
 
 <!-- Mapbox will draw the map into this div -->
-			<div id='map'></div>
+	<div id='map'>
+	  </div>
 
 <!-- JS that needs the above elements to be declared before it runs -->
-		<script src='scripts/onload.js'></script>
+	<script src="scripts/onload.js"></script>
 
-	</body>
+	<div id="console">
+	  <div class="hide-for-small">
+		<img class="style-logo" src="images/cbf_logo_curved_bottom.png" alt="Charles Butt Foundation logo">
+	  </div>
+		<div id='legend' class='legend hide-for-small'>
+			<div class="header">Click below to toggle visibility</div>
+		<div class='legend-scale'>
+			<ul class='legend-labels'>
+				<li onClick="showHideLayer('charles-butt-scholars-points', markerNames=['charles_butt_scholars', 'charles_butt_scholars_icon']);" style="cursor: pointer;"><span id="charles_butt_scholars"></span>Charles Butt Scholars</li>
+				<li onClick="showHideLayer('raising-blended-learners-campuses-points', markerNames=['raising_blended_learners_campuses']);" style="cursor: pointer;"><span id="raising_blended_learners_campuses"></span>Raising Blended Learners (Districts)</li>
+				<li onClick="showHideLayer('raising-school-leaders-points', markerNames=['raising_school_leaders']);" style="cursor: pointer;"><span id="raising_school_leaders"></span>Raising School Leaders Participants</li>
+				<li onClick="showHideLayer('raising-texas-teachers-points', markerNames=['raising_texas_teachers', 'raising_texas_teachers_icon']);" style="cursor: pointer;"><nobr><span id="raising_texas_teachers"></span>Raising Texas Teachers:<br />(University Partners)</nobr></li>
+				<li id="house_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-house-districts-lines', markerNames=['state_house_districts']);" style="cursor: pointer !important;"><span id="state_house_districts" class="inactive"></span>School District Boundaries</li>
+				<li id="senate_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-senate-districts-lines', markerNames=['state_senate_districts']);" style="cursor: pointer !important;"><span id="state_senate_districts" class="inactive"></span>Education Service Center Boundaries</li>
+				<li id="school_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-school-districts-lines', markerNames=['state_school_districts']);" style="cursor: pointer !important;"><span id="state_school_districts" class="inactive"></span>State School Districts</li>
+				<li onClick="showHideAlumni(showOnly=true);" style="cursor: pointer;"><span id="alumni_markers"></span>Alumni & active in current year</li>
+				<li onClick="showHideAlumni(showOnly=false, hideOnly=true);" style="cursor: pointer;"><span id="active_markers" class="inactive"></span>Active in current year only</li>
+			</ul>
+		</div> <!-- end of div class='legend-scale' -->
+
+			<div class="header-dropdown">
+			Use the drop-down menus below to zoom to a <span id="house-district-reference">House</span><span id="senate-district-reference">Senate</span><span id="school-district-reference">School</span> District of your choice.		
+			</div>
+
+			<!--Drop down controls-->
+
+			<select id="house-districts-control" onchange="zoomToPolygon('state-house-districts', this.value, 'house_dist');"></select>
+			<select id="senate-districts-control" onchange="zoomToPolygon('state-senate-districts', this.value, 'senate_dist');"></select>
+			<select id="school-districts-control" onchange="zoomToPolygon('state-school-districts', this.value, 'NAME');"></select>
+
+			<!-- House/Senate districts switcher -->
+
+			<p onClick="zoomToPolygon('', '-108,25,-88,37,0', '');" class="zoomoutlink"><span id="texas_icon" style="cursor:pointer"></span>Show whole state
+			</p>
+
+			<p id="switch-from-house-districts" class="districtswitcher">
+				<input type="radio" checked="true">
+					<span class="checkmark"></span>Texas <b>House</b> Districts.
+
+				<br />
+
+				<a href="index.html?districts=senate"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=senate'; return false;"/>
+					<span class="checkmark"></span>Texas <b>Senate</b> Districts.</a>
+
+				<br />
+
+				<a href="index.html?districts=isd"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=isd'; return false;"/>
+					<span class="checkmark"></span>Texas <b>School</b> Districts.</a>
+			</p>
+
+			<p id="switch-from-senate-districts" class="districtswitcher">
+				<a href="index.html?districts=house"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=house'; return false;"/>
+					<span class="checkmark"></span>Texas <b>House</b> Districts.</a>
+
+				<br />
+
+				<input type="radio" checked="true">
+					<span class="checkmark"></span>Texas <b>Senate</b> Districts.
+
+				<br />
+
+				<a href="index.html?districts=isd"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=isd'; return false;"/>
+					<span class="checkmark"></span>Texas <b>School</b> Districts.</a>
+			</p>
+
+			<p id="switch-from-school-districts" class="districtswitcher">
+				<a href="index.html?districts=house"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=house'; return false;"/>
+					<span class="checkmark"></span>Texas <b>House</b> Districts.</a>
+
+				<br />
+
+				<a href="index.html?districts=senate"><input type="radio"  style="cursor:pointer" onclick="javascript:window.location.href='index.html?districts=senate'; return false;"/>
+					<span class="checkmark"></span>Texas <b>Senate</b> Districts.</a>
+
+				<br />
+
+				<input type="radio" checked="true">
+					<span class="checkmark"></span>Texas <b>School</b> Districts.
+			</p>
+
+
+			<p class="header-explore">
+				Explore the reach of our programs across the state</p>
+			
+<!--create time slider-->
+			<div class='session' id='sliderbar'>
+				Year: <label id='active-year'></label><br />
+				<input id='slider' class='row' type='range' min='2008' max='2021' step='1' value='2008' onmouseup="moveYearSlider('slider', 'active-year', 0);" />
+			</div>
+			<div id='slidercontrols'>
+				<span id='slider_back' onclick="moveYearSlider('slider', 'active-year', -1);" title='Go back one year'><img src="images/skip_backward.svg"></span>
+				<span id='slider_play' onclick="startYearAnimation('slider', 'active-year', 1000, 'slider_play', 'slider_stop');" title='Animate timeline'><img src="images/play.svg"></span>
+				<span id='slider_stop' onclick="stopYearAnimation('slider_play', 'slider_stop');" title='Stop animation'><img src="images/stop.svg"></span>
+				<span id='slider_forward' onclick="moveYearSlider('slider', 'active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
+			</div> <!-- id='slidercontrols' -->
+
+			<div class='map-credit'>Source: <a href="https://www.https://charlesbuttfdn.org/" target="_blank">Charles Butt Foundation</a></div>
+			<div class='map-credit'>Map design by <a href="http://www.coregis.net/" target="_blank">CORE GIS</a></div>
+		</div> <!-- end of div id="legend" -->
+
+	<!--END FLYOUT FOR 'CONSOLE'-->
+
+	<!--BEGIN SUMMARY STATS APPEAR/DISAPPEAR WINDOW
+			This bit of code creates the temporary window that appears above the legend
+			and displays the summary stats for the selected district-->
+
+		<div class='stats' id='statsBox'>
+			<div class='stats-title'>
+				Active Programs in
+				<br />
+				<span class="select" id="stats.districtType"></span> <span class="select" id="stats.districtName"></span>
+				<br />
+				In <span class="select" id="stats.year"></span>
+			</div>
+			<div class='stats-scale'>
+				<ul class='stats-labels'>
+<!-- for maintenance: always make the id of these = count.layerName because that's what the updateStatsBox() function looks for -->
+					<li>Raising Blended Learners:  <span class="count.rbl" id="count.raising-blended-learners-campuses-points"></span></li>
+					<li>Charles Butt Scholars: <span class="count.cbs" id="count.charles-butt-scholars-points"></span></li>
+					<li>Partner Universities: <span class="count.ihe" id="count.raising-texas-teachers-points"></span></li>
+					<li>Raising School Leaders: <span class="count.rsl" id="count.raising-school-leaders-points"></span></li>
+				</ul>
+			</div> <!-- end of div class='stats-scale' -->
+		</div>
+
+	<!--END SUMMARY STATS APPEAR/DISAPPER WINDOW-->
+        </div>
+	  </div> <!-- end of div id="console" class="sidenav"--> 
+  </div>
+</body>
 </html>

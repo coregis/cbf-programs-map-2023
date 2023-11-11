@@ -1,8 +1,32 @@
+/* utility styles */
+.hidden {
+  display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.hide-for-small {
+  display: block;
+}
+
+/* element styles */
 html, body {
-	padding:0;
-	margin:0;
-	font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif;
-    overflow: hidden;
+  box-sizing: border-box;
+  color: #505050;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Work Sans", Helvetica, Arial, sans-serif;
+}
+
+/* whole page container */
+.container {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 div#landing {
@@ -22,7 +46,7 @@ div#landing_content {
 	position: relative;
 	width: 38vw;
 	margin: 25vh auto;
-	font-family: Work Sans, sans-serif;
+	font-family: "Work Sans", sans-serif;
 	font-weight: 300;
 }
 
@@ -51,20 +75,14 @@ div#landing_content {
 	font-weight: 500;
 }
 
-div#map {
-	  z-index: 1;
-	  height: 100%;
-	  width: calc(100% - 260px);
-	  position: absolute;
-	  left: 260px;
-	  top: 0;
-	  right: 0;
-	  bottom:0;
+/* the map */
+#map {
+  flex: 1 1 auto;
 }
 
 /*This formatting is for the  name of the fields in the pop-up*/
 span.varname{
-	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-family: "Work Sans", Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-style: normal;
 	font-variant: normal;
@@ -74,7 +92,7 @@ span.varname{
 
 /*This is formatting for the text that follows the label*/
 span.attribute {
-	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-family: "Work Sans", Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-style: normal;
 	font-variant: normal;
@@ -121,7 +139,7 @@ select {
 	z-index : 1;
     left: 0;
 	bottom: 0;
-	font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+	font-family: "Work Sans", helvetica, arial, sans-serif;
 	font-weight: normal;
 	color: #363635;
 	text-decoration: none;
@@ -143,7 +161,6 @@ select {
 	padding: 10px;
 	z-index: 1;
 	font-family: "Work Sans", helvetica, arial, sans-serif;
-	width: 240px;
 	margin: 10px auto;
 }
 
@@ -203,13 +220,14 @@ ul{
 	font-size:
 }
 
+/* left sidebar / console */
 #console {
+  background-color: #FFF;
   display: flex;
   flex-direction: column;
   flex: 0 0 240px;
-  min-height: 100%;
   margin: 0px;
-  background-color: white;
+  overflow-y: auto;
 }
 
 .console-content {
@@ -222,12 +240,55 @@ ul{
   padding: 10px 20px;
 }
 
+.small-logo {
+  background: #fffff;
+}
 
 .style-logo {
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
   display: block;
+}
+
+.logo-dark {
+  background-color: #505050;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.header {
+  color: #000;
+  font-family: "Work Sans",Arial,Sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-bottom: 10px;
+  margin-top:  0px;	
+}
+
+.header-dropdown {
+  color: #000;
+  font-family: "Work Sans",Arial,Sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px,0px,10px,0px
+}
+
+p.header-explore {
+  color: #000;
+  text-align: center;
+  font-family: "Work Sans",Arial,Sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 19.2px,0px,0px;
+  padding: 10px,0px,10px,0px
 }
 
 .legend-title {
@@ -245,7 +306,9 @@ ul{
   .legend .legend-scale ul {
     margin: 0;
     margin-bottom: 5px;
-    padding: 0;
+    font-family: "Work Sans", helvetica, arial, sans-serif;
+    font-weight: 500;
+	padding: 0;
     float: left;
     list-style: none;
     }
@@ -407,13 +470,16 @@ ul{
 }
 
   .legend .legend-source {
-    font-size: 70%;
-    color: #999;
+    font-size: 90%;
+    font-family: "Work Sans", helvetica, arial, sans-serif;
+	color: #999;
     clear: both;
     }
 
   .legend .map-credit {
-    font-size: 70%;
+    font-size: 90%;
+    font-family: "Work Sans", helvetica, arial, sans-serif;
+	font-weight: normal;
     color: #999;
     clear: both;
     }
@@ -441,7 +507,7 @@ a:active {
 /* This code makes the sidenav 'always on' */
 .sidenav {
   height: 100%;
-  width: 260px;
+  width: 240px;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -490,7 +556,7 @@ border: none;
 }
 
 p.moreinfo  {
-  padding: 8px 48px 8px 32px;
+  padding: 32px 24px 0px 16px;
   background: #ffff;
   color:#4a4a4a;
   font-family: 'Work Sans', sans-serif;
@@ -541,7 +607,7 @@ p.programs  {
 }
 
 .sidenav img {
-	width: 260px;
+	width: 240px;
 	padding: 0px 30px;
 }
 
@@ -700,3 +766,30 @@ span#slider_stop {
 	display: none;
 }
 
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.hide-for-small {
+	display: block;
+  color: #000;
+  font-family: "Work Sans",Arial,Sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-bottom: 10px;
+}	
+
+.version-text {
+  font-size: 70%;
+  color: #999;
+  clear: both;
+}
+
+.version-text {
+  font-family: 'Work Sans', sans-serif;
+  font-style: italic;
+  font-size: 9px;
+  color: #505050;	
+}

@@ -1,10 +1,11 @@
-// this is the cbf-programs-map token from the CBF Mapbox account
+// this is the CBF Mapbox account token cbf-programs-map 
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoid2ViLWNoYXJsZXNidXR0ZmRuIiwiYSI6ImNsb3FlMWM1eDBnM3UyanBzb3V3MzNxc3cifQ._PujXINObg5VlQm7Yi10rA';
 
 //set bounds to Texas
 var bounds = [
-		[-114.9594, 21.637], // southwest coords
-		[-85.50, 39.317] // northeast coords
+		[-120, 20], // southwest coords
+		[-80, 38] // northeast coords
 	];
 
 // skip the landing page if we already have ?=arguments
@@ -15,7 +16,7 @@ if (!urlParams["districts"]) {
 var map = new mapboxgl.Map({
 	container: 'map', // container id
 	style: 'mapbox://styles/web-charlesbuttfdn/cloqecrs0003i01rcc34e7tvx', // CBF stylesheet location; this is the v2.3.1 style with markers turned OFF
-	center: [-99.228516, 31.203405], // starting position [lng, lat]
+	center: [-98.3,31], // starting position [lng, lat]
 	zoom: 5.5, // starting zoom
 	maxBounds: bounds // sets bounds as max
 });
