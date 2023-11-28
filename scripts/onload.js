@@ -13,6 +13,8 @@ if (!urlParams["districts"]) {
 	document.getElementById('landing').style.visibility = "visible";
 }
 
+// fit bounds is not doing what we want, which is to zoom the map to the extent of TX
+// regardless of size of viewport
 var map = new mapboxgl.Map({
 	container: 'map', // container id
 	style: 'mapbox://styles/web-charlesbuttfdn/cloqecrs0003i01rcc34e7tvx', // CBF stylesheet location; this is the v2.3.1 style with markers turned OFF
@@ -221,7 +223,7 @@ map.on('load', function () {
 			{
 				'sourceName': 'state-school-districts',
 				'sourceID': 'texas_districts_1882_v4',
-				'sourceURL': 'mapbox://core-gis.b73007d3',
+				'sourceURL': 'web-charlesbuttfdn.117fbef3',
 				'lineLayerName': 'state-school-districts-lines',
 				'lineColor': 'rgba(117, 137, 77, 0.5)',
 				'legendID': 'state_school_districts',
