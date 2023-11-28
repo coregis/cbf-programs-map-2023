@@ -16,9 +16,14 @@ if (!urlParams["districts"]) {
 var map = new mapboxgl.Map({
 	container: 'map', // container id
 	style: 'mapbox://styles/web-charlesbuttfdn/cloqecrs0003i01rcc34e7tvx', // CBF stylesheet location; this is the v2.3.1 style with markers turned OFF
-	center: [-98.3,31], // starting position [lng, lat]
+	fitBounds: ([
+		[-108, 25],
+		[-88,37]
+	]),
+	/*center: [-98.3,31], // starting position [lng, lat]
 	zoom: 5.5, // starting zoom
 	maxBounds: bounds // sets bounds as max
+	*/
 });
 
 var originalZoomLevel = map.getZoom();
@@ -356,12 +361,6 @@ function fillpopup_cbs(features){
 		html = html + "<br />"
 		html = html + "<span class='varname'>Year: </span> <span class='attribute'>" + data.year + "</span>";
 		html = html + "<br />"
-		html = html + "<span class='attribute'>" + '<a href="' + data.cb_scholar_url + '"' + " target='_blank'" + '>' + data.link + '</a>'+"</span>";
-		if (data.count > 1) {
-			html = html + "<br />"
-			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
-		}
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function

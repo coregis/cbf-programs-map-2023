@@ -44,8 +44,8 @@ div#landing {
 
 div#landing_content {
 	position: relative;
-	width: 38vw;
-	margin: 25vh auto;
+	width: 60vw;
+	margin: 15vh auto;
 	font-family: "Work Sans", sans-serif;
 	font-weight: 300;
 }
@@ -262,6 +262,7 @@ ul{
 .header {
   color: #000;
   font-family: "Work Sans",Arial,Sans-serif;
+  text-align: center;
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
@@ -272,10 +273,11 @@ ul{
 .header-dropdown {
   color: #000;
   font-family: "Work Sans",Arial,Sans-serif;
+  text-align: center;
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 20px;
   padding: 20px,0px,10px,0px
 }

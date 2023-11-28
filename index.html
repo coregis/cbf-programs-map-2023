@@ -73,34 +73,29 @@
 		<img class="style-logo" src="images/cbf_logo_curved_bottom.png" alt="Charles Butt Foundation logo">
 	  </div>
 		<div id='legend' class='legend hide-for-small'>
-			<div class="header">Click below to toggle visibility</div>
+			<div class="header">Toggle visibility</div>
 		<div class='legend-scale'>
 			<ul class='legend-labels'>
 				<li onClick="showHideLayer('charles-butt-scholars-points', markerNames=['charles_butt_scholars', 'charles_butt_scholars_icon']);" style="cursor: pointer;"><span id="charles_butt_scholars"></span>Charles Butt Scholars</li>
 				<li onClick="showHideLayer('raising-blended-learners-campuses-points', markerNames=['raising_blended_learners_campuses']);" style="cursor: pointer;"><span id="raising_blended_learners_campuses"></span>Raising Blended Learners (Districts)</li>
 				<li onClick="showHideLayer('raising-school-leaders-points', markerNames=['raising_school_leaders']);" style="cursor: pointer;"><span id="raising_school_leaders"></span>Raising School Leaders Participants</li>
-				<li onClick="showHideLayer('raising-texas-teachers-points', markerNames=['raising_texas_teachers', 'raising_texas_teachers_icon']);" style="cursor: pointer;"><nobr><span id="raising_texas_teachers"></span>Raising Texas Teachers:<br />(University Partners)</nobr></li>
-				<li id="house_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-house-districts-lines', markerNames=['state_house_districts']);" style="cursor: pointer !important;"><span id="state_house_districts" class="inactive"></span>School District Boundaries</li>
-				<li id="senate_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-senate-districts-lines', markerNames=['state_senate_districts']);" style="cursor: pointer !important;"><span id="state_senate_districts" class="inactive"></span>Education Service Center Boundaries</li>
+				<li onClick="showHideLayer('raising-texas-teachers-points', markerNames=['raising_texas_teachers', 'raising_texas_teachers_icon']);" style="cursor: pointer;"><span id="raising_texas_teachers"></span>Raising Texas Teachers:<br />(University Partners)</li>
 				<li id="school_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-school-districts-lines', markerNames=['state_school_districts']);" style="cursor: pointer !important;"><span id="state_school_districts" class="inactive"></span>State School Districts</li>
-				<li onClick="showHideAlumni(showOnly=true);" style="cursor: pointer;"><span id="alumni_markers"></span>Alumni & active in current year</li>
-				<li onClick="showHideAlumni(showOnly=false, hideOnly=true);" style="cursor: pointer;"><span id="active_markers" class="inactive"></span>Active in current year only</li>
 			</ul>
 		</div> <!-- end of div class='legend-scale' -->
 
 			<div class="header-dropdown">
-			Use the drop-down menus below to zoom to a <span id="house-district-reference">House</span><span id="senate-district-reference">Senate</span><span id="school-district-reference">School</span> District of your choice.		
+			Zoom in and out		
 			</div>
 
-			<!--Drop down controls-->
+			<!--Drop down controls; we will add ESC boundaries in Phase 2-->
 
-			<select id="house-districts-control" onchange="zoomToPolygon('state-house-districts', this.value, 'house_dist');"></select>
-			<select id="senate-districts-control" onchange="zoomToPolygon('state-senate-districts', this.value, 'senate_dist');"></select>
 			<select id="school-districts-control" onchange="zoomToPolygon('state-school-districts', this.value, 'NAME');"></select>
 
-			<!-- House/Senate districts switcher -->
+			<!-- House/Senate districts switcher; this will need to be changed to School/ESC districts in Phase 2 -->
 
-			<p onClick="zoomToPolygon('', '-108,25,-88,37,0', '');" class="zoomoutlink"><span id="texas_icon" style="cursor:pointer"></span>Show whole state
+
+			<p onClick="zoomToPolygon('', '-108,25,-88,37,0', '');" class="zoomoutlink"><span id="texas_icon" style="cursor:pointer"></span>View whole state
 			</p>
 
 			<p id="switch-from-house-districts" class="districtswitcher">
@@ -146,7 +141,7 @@
 
 				<input type="radio" checked="true">
 					<span class="checkmark"></span>Texas <b>School</b> Districts.
-			</p>
+			</p>	
 
 
 			<p class="header-explore">
