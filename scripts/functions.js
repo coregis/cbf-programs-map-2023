@@ -13,7 +13,7 @@ var urlParams = {};
 window.location.href.replace(
 	/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {urlParams[key] = value;}
 );
-var showHouseDistricts = true;
+var showHouseDistricts = false;
 var showSenateDistricts = false;
 var showSchoolDistricts = false;
 if (
