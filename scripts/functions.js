@@ -15,7 +15,7 @@ window.location.href.replace(
 );
 var showHouseDistricts = false;
 var showSenateDistricts = false;
-var showSchoolDistricts = false;
+var showSchoolDistricts = true;
 if (
 	(
 		urlParams["districts"] && (

@@ -222,7 +222,7 @@ map.on('load', function () {
 			{
 				'sourceName': 'state-school-districts',
 				'sourceID': 'texas_districts_1882_v4',
-				'sourceURL': 'web-charlesbuttfdn.117fbef3',
+				'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
 				'lineLayerName': 'state-school-districts-lines',
 				'lineColor': 'rgba(117, 137, 77, 0.5)',
 				'legendID': 'state_school_districts',
