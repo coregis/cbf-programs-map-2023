@@ -141,6 +141,7 @@ function showHideAlumni(showOnly=false, hideOnly=false) {
 //zoomToPolygon() zooms the map to the district extent
 
 function runWhenLoadComplete() {
+	zoomToPolygon('', '-108,25,-88,37,0', '');
 	if (!map.getLayer('raising-school-leaders-points') || !map.getLayer('charles-butt-scholars-points') || !map.getLayer('raising-blended-learners-campuses-points') || !map.getLayer('raising-texas-teachers-points')) {
 		setTimeout(runWhenLoadComplete, 100);
 	}
@@ -167,6 +168,7 @@ function runWhenLoadComplete() {
 			map.moveLayer('raising-texas-teachers-points');
 		}, 100);
 	}
+	zoomToPolygon('', '-108,25,-88,37,0', '');
 }
 
 function populateZoomControl(selectID, sourceID, fieldName, layerName, hideMaskLayer=true) {
