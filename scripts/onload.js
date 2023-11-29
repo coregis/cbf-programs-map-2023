@@ -1,4 +1,4 @@
-// this is the CBF Mapbox account token cbf-programs-map 
+// this is the CBF Mapbox account token cbf-programs-map
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoid2ViLWNoYXJsZXNidXR0ZmRuIiwiYSI6ImNsb3FlMWM1eDBnM3UyanBzb3V3MzNxc3cifQ._PujXINObg5VlQm7Yi10rA';
 
@@ -50,6 +50,7 @@ map.on('click', 'school_house_senate_districts_UNION-poly', function (e) {
 
 
 
+/*
 // make appropriate legend entry visible, and remove whichever zoom-to-districts dropdown we're not going to be using
 if (showHouseDistricts) {
 	document.getElementById("house_districts_legend_entry").style.display = "inline";
@@ -72,9 +73,7 @@ if (showSchoolDistricts) {
 } else {
 	removeElement("school-districts-control");
 }
-
-
-
+*/
 
 
 
