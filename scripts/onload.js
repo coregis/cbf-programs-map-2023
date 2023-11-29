@@ -24,8 +24,8 @@ var map = new mapboxgl.Map({
 	]),
 	/*center: [-98.3,31], // starting position [lng, lat]
 	zoom: 5.5, // starting zoom
-	maxBounds: bounds // sets bounds as max
 	*/
+	maxBounds: bounds // sets bounds as max
 });
 
 var originalZoomLevel = map.getZoom();
