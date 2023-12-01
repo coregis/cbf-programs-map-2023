@@ -271,7 +271,11 @@ the location of the click, with description HTML from its properties
 // generalised code to add district info
 function expandDistrictInfo(district) {
 // make sure we have a district to use
-if (district.length > 0 && district[0].layer.id === 'school_house_senate_districts_UNION-poly') {
+if (
+		(showHouseDistricts || showSenateDistricts) &&
+		district.length > 0 &&
+		district[0].layer.id === 'school_house_senate_districts_UNION-poly'
+	) {
 	data = district[0].properties;
 	var html = "";
 	html += "<span class='varname'>";
