@@ -271,7 +271,11 @@ the location of the click, with description HTML from its properties
 // generalised code to add district info
 function expandDistrictInfo(district) {
 // make sure we have a district to use
-if (district.length > 0 && district[0].layer.id === 'school_house_senate_districts_UNION-poly') {
+if (
+		(showHouseDistricts || showSenateDistricts) &&
+		district.length > 0 &&
+		district[0].layer.id === 'school_house_senate_districts_UNION-poly'
+	) {
 	data = district[0].properties;
 	var html = "";
 	html += "<span class='varname'>";
@@ -311,6 +315,9 @@ map.on('zoomend', function() { updateStatsBox(); });
 function fillpopup_rbl(features){
 	let html = "";
 	for (i in features) {
+		if (i > 0) {
+			html += "<hr class='divider'/>";
+		}
 		let data = features[i];
 		let endyear = parseInt(data.year) + 3 // 4-year terms for this program
 		if (data.url === undefined) {
@@ -327,7 +334,6 @@ function fillpopup_rbl(features){
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
 		html += '<br /><span class="attribute"><a href="https://charlesbuttfdn.org//foundation/blended/blended-site-visits/">Request a site visit</a></span>';
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function
@@ -391,6 +397,9 @@ map.on('click', 'raising-texas-teachers-points', function (e) {
 function fillpopup_rtt(features){
 	var html = "";
 	for (i in features) {
+		if (i > 0) {
+			html += "<hr class='divider'/>";
+		}
 		let data = features[i];
 		html = html + "<span class='varname'>Institute: </span> <span class='attribute'>" + data.university_name + "</span>";
 		html = html + "<br />"
@@ -399,7 +408,6 @@ function fillpopup_rtt(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function
@@ -431,6 +439,9 @@ map.on('click', 'raising-school-leaders-points', function (e) {
 function fillpopup_rsl(features){
 	let html = "";
 	for (i in features) {
+		if (i > 0) {
+			html += "<hr class='divider'/>";
+		}
 		let data = features[i];
 		html = html + "<span class='varname'>Institute: </span> <span class='attribute'>" + data.institute + "</span>";
 		html = html + "<br />"
@@ -445,7 +456,6 @@ function fillpopup_rsl(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function
