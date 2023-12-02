@@ -100,9 +100,8 @@ let minYear;
 let maxYear;
 ready(function() {
 	slider = document.getElementById('slider');
-	console.log(slider);
-	minYear = slider.min;
-	maxYear = slider.max;
+	minYear = parseInt(slider.min, 10);;
+	maxYear = parseInt(slider.max, 10);;
 	if (!urlParams["year"]) {
 		filterStates.year = maxYear;
 	}
@@ -169,7 +168,7 @@ function runWhenLoadComplete() {
 		setTimeout(runWhenLoadComplete, 100);
 	}
 	else {
-		moveYearSlider('slider', 'active-year', 0); // calling this with a 0 increment will make sure that the filter, caption and slider position all match.  Without doing this, the browser seems to keep the slider position between refreshes, but reset the filter and caption so they get out of sync.
+		moveYearSlider('active-year', 0); // calling this with a 0 increment will make sure that the filter, caption and slider position all match.  Without doing this, the browser seems to keep the slider position between refreshes, but reset the filter and caption so they get out of sync.
 		if (showHouseDistricts) {
 			populateZoomControl("house-districts-control", "state-house-districts", "District", "Texas House Districts");
 			map.moveLayer('state-house-districts-lines');
@@ -366,12 +365,8 @@ function updateYearSlider(numberID, year) {
 	setTimeout(function(){ updateStatsBox(); }, 100);
 }
 
-function moveYearSlider(sliderID, numberID, increment, loop=false) {
-	slider = document.getElementById(sliderID);
-	minYear = parseInt(slider.min, 10);
+function moveYearSlider(numberID, increment, loop=false) {
 	currentYear = filterStates.year ? parseInt(filterStates.year, 10) : parseInt(slider.value, 10);
-	maxYear = parseInt(slider.max, 10);
-
 	desiredYear = currentYear + increment;
 
 	if (loop) { // if we're looping then wrap any overflow around
@@ -393,21 +388,21 @@ function moveYearSlider(sliderID, numberID, increment, loop=false) {
 	}
 }
 
-function animateYearSlider(sliderID, numberID, delay) {
+function animateYearSlider(numberID, delay) {
 	if (animationRunning) {
-		moveYearSlider(sliderID, numberID, 1, loop=true);
+		moveYearSlider(numberID, 1, loop=true);
 		setTimeout(
-			function() {animateYearSlider(sliderID, numberID, delay)},
+			function() {animateYearSlider(numberID, delay)},
 			delay
 		);
 	}
 }
 
-function startYearAnimation(sliderID, numberID, delay, playID, stopID) {
+function startYearAnimation(numberID, delay, playID, stopID) {
 	animationRunning = true;
 	document.getElementById(playID).style.display = 'none';
 	document.getElementById(stopID).style.display = 'inline';
-	animateYearSlider(sliderID, numberID, delay);
+	animateYearSlider(numberID, delay);
 }
 
 function stopYearAnimation(playID, stopID) {

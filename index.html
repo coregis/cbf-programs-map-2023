@@ -150,13 +150,13 @@
 <!--create time slider-->
 			<div class='session' id='sliderbar'>
 				Year: <label id='active-year'></label><br />
-				<input id='slider' class='row' type='range' min='2008' max='2023' step='1' value='2008' onmouseup="moveYearSlider('slider', 'active-year', 0);" />
+				<input id='slider' class='row' type='range' min='2008' max='2023' step='1' value='2008' onmouseup="moveYearSlider('active-year', 0);" />
 			</div>
 			<div id='slidercontrols'>
-				<span id='slider_back' onclick="moveYearSlider('slider', 'active-year', -1);" title='Go back one year'><img src="images/skip_backward.svg"></span>
-				<span id='slider_play' onclick="startYearAnimation('slider', 'active-year', 1000, 'slider_play', 'slider_stop');" title='Animate timeline'><img src="images/play.svg"></span>
+				<span id='slider_back' onclick="moveYearSlider('active-year', -1);" title='Go back one year'><img src="images/skip_backward.svg"></span>
+				<span id='slider_play' onclick="startYearAnimation('active-year', 1000, 'slider_play', 'slider_stop');" title='Animate timeline'><img src="images/play.svg"></span>
 				<span id='slider_stop' onclick="stopYearAnimation('slider_play', 'slider_stop');" title='Stop animation'><img src="images/stop.svg"></span>
-				<span id='slider_forward' onclick="moveYearSlider('slider', 'active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
+				<span id='slider_forward' onclick="moveYearSlider('active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
 			</div> <!-- id='slidercontrols' -->
 
 			<div class='map-credit'>Source: <a href="https://www.https://charlesbuttfdn.org/" target="_blank">Charles Butt Foundation</a></div>
