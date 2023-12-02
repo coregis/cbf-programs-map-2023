@@ -317,15 +317,7 @@ function setFilter(sourceID) {
 		);
 		map.setPaintProperty(
 			sourceID,
-			'circle-opacity',
-			[
-				"interpolate",
-				["linear"],
-				['+', ['to-number', ['get', 'year']], (termLength - 1)],
-				2000, 0.2,
-				(filterStates.year - 1), 0.2,
-				filterStates.year, 1
-			]
+			'circle-opacity', 0.3
 		);
 	} else {
 		console.log('something`s wrong, there should never be no year filter', filterStates);
