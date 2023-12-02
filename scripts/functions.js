@@ -1,3 +1,12 @@
+// A helper to see if the page has finished loading.
+function ready(fn) {
+  if (document.readyState !== "loading") {
+    fn();
+    return;
+  }
+  document.addEventListener("DOMContentLoaded", fn);
+}
+
 // store this as a global variable so that the stats box can always access the current value
 var filterStates = {
 	year: false,
@@ -82,14 +91,28 @@ else {
 }
 // now we can check the two showXDistricts variables anywhere that we might introduce House or Senate districts to decide which one to show
 
+// set min, max, and starting year parameters based on time slider configuration & URL parameters
 if (urlParams["year"]) {
 	filterStates.year = urlParams["year"];
-} else {
-	filterStates.year = 2021;
 }
+let slider;
+let minYear;
+let maxYear;
+ready(function() {
+	slider = document.getElementById('slider');
+	console.log(slider);
+	minYear = slider.min;
+	maxYear = slider.max;
+	if (!urlParams["year"]) {
+		filterStates.year = maxYear;
+	}
+});
+
+// zoom to a district if request in the URL parameters
 if (urlParams["zoomto"]) {
 	filterStates.district.val = urlParams["zoomto"];
 }
+
 
 
 
