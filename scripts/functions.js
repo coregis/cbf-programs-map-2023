@@ -93,17 +93,22 @@ else {
 
 // set min, max, and starting year parameters based on time slider configuration & URL parameters
 if (urlParams["year"]) {
-	filterStates.year = urlParams["year"];
+	const year = parseInt(urlParams["year"]);
+	if (Number.isInteger(year)) {
+		filterStates.year = year;
+	}
 }
 let slider;
 let minYear;
 let maxYear;
 ready(function() {
 	slider = document.getElementById('slider');
-	minYear = parseInt(slider.min, 10);;
-	maxYear = parseInt(slider.max, 10);;
-	if (!urlParams["year"]) {
+	minYear = parseInt(slider.min);
+	maxYear = parseInt(slider.max);
+	if ((!filterStates.year) || (filterStates.year > maxYear)) {
 		filterStates.year = maxYear;
+	} else if (filterStates.year < minYear) {
+		filterStates.year = minYear;
 	}
 });
 
