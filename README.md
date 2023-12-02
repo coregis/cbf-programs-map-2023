@@ -13,6 +13,6 @@ Then the page should be available at http://localhost:2023/ (you can change the 
 
 ### Date range
 
-The min and max years for the time slider are set in the `<input id='slider'>` declaration in `index.html` itself.
+The min, max, and default starting years for the time slider are set in the `<input id='slider'>` declaration in `index.html` itself.  All other references take their values from what is set there.
 
 Years outside that range can in fact be selected using the `year=xxxx` URL argument, but the user won't be able to go back to those after interacting with the time slider, so this is only occasionally useful for testing.
