@@ -413,7 +413,7 @@ function stopYearAnimation(playID, stopID) {
 
 function updateURL(district='0') {
 	var newURL = window.location.pathname;
-	var newTitle = 'Raise Your Hand Texas programs'
+	var newTitle = 'Charles Butt Foundation programs'
 	if (showHouseDistricts) {
 		newURL += '?districts=house';
 	} else if (showSenateDistricts) {
