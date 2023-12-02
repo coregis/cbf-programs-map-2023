@@ -386,11 +386,11 @@ function moveYearSlider(numberID, increment, loop=false) {
 	}
 
 	slider.value = desiredYear;
-	updateURL(district = filterStates.district ? filterStates.district.val : '0');
 	updateYearSlider(numberID, desiredYear);
 	if (desiredYear < popupYear) {
 		popup.remove();
 	}
+	updateURL(district = filterStates.district ? filterStates.district.val : '0');
 }
 
 function animateYearSlider(numberID, delay) {
