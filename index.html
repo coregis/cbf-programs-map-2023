@@ -45,7 +45,7 @@
 				<b>Map:</b> Visualize the growth of Charles Butt Foundation Programs (Raising Blended Learners, Raising School Leaders, and Raising Texas Teachers: University Partners and Charles Butt Scholars) from 2008 to the present.
 				<br>
 				<br>
-				<b>Interaction:</b> In the sidebar on the left hand side, click the Play, Stop, Skip Forward, or Skip Backward buttons to explore the reach of our programs across the state of Texas. You can toggle viewing or hiding each Program, and view by House, Senate, or School District.  
+				<b>Interaction:</b> In the sidebar on the left hand side, click the Play, Stop, Skip Forward, or Skip Backward buttons to explore the reach of our programs across the state of Texas. You can toggle viewing or hiding each Program, and view by House, Senate, or School District.
 				<br>
 				<br>
 				Finally, you can click on each dot to learn more about a particular program, partnership, or recipient.
@@ -85,7 +85,7 @@
 		</div> <!-- end of div class='legend-scale' -->
 
 			<div class="header-dropdown">
-			Zoom in and out		
+			Zoom in and out
 			</div>
 
 			<!--Drop down controls; we will add ESC boundaries in Phase 2-->
@@ -141,22 +141,22 @@
 
 				<input type="radio" checked="true">
 					<span class="checkmark"></span>Texas <b>School</b> Districts.
-			</p>	
+			</p>
 
 
 			<p class="header-explore">
 				Explore the reach of our programs across the state</p>
-			
+
 <!--create time slider-->
 			<div class='session' id='sliderbar'>
 				Year: <label id='active-year'></label><br />
-				<input id='slider' class='row' type='range' min='2008' max='2021' step='1' value='2008' onmouseup="moveYearSlider('slider', 'active-year', 0);" />
+				<input id='slider' class='row' type='range' min='2008' max='2023' step='1' value='2023' onmouseup="moveYearSlider('active-year', 0);" />
 			</div>
 			<div id='slidercontrols'>
-				<span id='slider_back' onclick="moveYearSlider('slider', 'active-year', -1);" title='Go back one year'><img src="images/skip_backward.svg"></span>
-				<span id='slider_play' onclick="startYearAnimation('slider', 'active-year', 1000, 'slider_play', 'slider_stop');" title='Animate timeline'><img src="images/play.svg"></span>
+				<span id='slider_back' onclick="moveYearSlider('active-year', -1);" title='Go back one year'><img src="images/skip_backward.svg"></span>
+				<span id='slider_play' onclick="startYearAnimation('active-year', 1000, 'slider_play', 'slider_stop');" title='Animate timeline'><img src="images/play.svg"></span>
 				<span id='slider_stop' onclick="stopYearAnimation('slider_play', 'slider_stop');" title='Stop animation'><img src="images/stop.svg"></span>
-				<span id='slider_forward' onclick="moveYearSlider('slider', 'active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
+				<span id='slider_forward' onclick="moveYearSlider('active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
 			</div> <!-- id='slidercontrols' -->
 
 			<div class='map-credit'>Source: <a href="https://www.https://charlesbuttfdn.org/" target="_blank">Charles Butt Foundation</a></div>
@@ -190,7 +190,7 @@
 
 	<!--END SUMMARY STATS APPEAR/DISAPPER WINDOW-->
         </div>
-	  </div> <!-- end of div id="console" class="sidenav"--> 
+	  </div> <!-- end of div id="console" class="sidenav"-->
   </div>
 </body>
 </html>
