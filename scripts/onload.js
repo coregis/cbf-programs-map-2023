@@ -224,18 +224,37 @@ map.on('load', function () {
 				'sourceID': 'texas_districts_1882_v4',
 				'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
 				'lineLayerName': 'state-school-districts-lines',
-				'lineColor': 'rgba(117, 137, 77, 0.5)',
+				'lineColor': 'rgba(117, 137, 77, 0.3)',
 				'legendID': 'state_school_districts',
 				'displayBehind': 'raising-school-leaders-points',
 				'polygonLayerName': 'state-school-districts-poly',
 				'polygonFillColor': 'rgba(153, 110, 0, 0)',
 				'polygonOutlineColor':'rgba(153, 110, 0, 0)',
-				'visibleOnLoad': true
+				'visibleOnLoad': false
 			}
 		);
 	}
-
-
+/*
+// ESC = Educational Service Centers	
+	if (showESCRegions) {
+	addVectorLayer(
+		map,
+		{
+			'sourceName': 'esc-regions',
+			'sourceID': 'ESC_Regions-6oqjhv',
+			'sourceURL': 'mapbox://web-charlesbuttfdn.30mozefe',
+			'lineLayerName': 'esc-regions-lines',
+			'lineColor': 'rgba(61, 57, 53, 0.7)',
+			'legendID': 'esc_regions',
+			'displayBehind': 'raising-school-leaders-points',
+			'polygonLayerName': 'esc-regions-poly',
+			'polygonFillColor': 'rgba(153, 110, 0, 0)',
+			'polygonOutlineColor':'rgba(153, 110, 0, 0)',
+			'visibleOnLoad': false
+		}
+	);
+}
+*/
 	// This is a special cases: the layer is never displayed, but can be used to set what will appear in popups when someone clicks on the map
 	addVectorLayer(
 		map,
