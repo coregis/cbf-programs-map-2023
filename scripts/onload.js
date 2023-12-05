@@ -1,9 +1,11 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiY29yZS1naXMiLCJhIjoiaUxqQS1zQSJ9.mDT5nb8l_dWIHzbnOTebcQ';
+// this is the CBF Mapbox account token cbf-programs-map
+
+mapboxgl.accessToken = 'pk.eyJ1Ijoid2ViLWNoYXJsZXNidXR0ZmRuIiwiYSI6ImNsb3FlMWM1eDBnM3UyanBzb3V3MzNxc3cifQ._PujXINObg5VlQm7Yi10rA';
 
 //set bounds to Texas
 var bounds = [
-		[-114.9594, 21.637], // southwest coords
-		[-85.50, 39.317] // northeast coords
+		[-120, 20], // southwest coords
+		[-80, 38] // northeast coords
 	];
 
 // skip the landing page if we already have ?=arguments
@@ -11,11 +13,18 @@ if (!urlParams["districts"]) {
 	document.getElementById('landing').style.visibility = "visible";
 }
 
+// fit bounds is not doing what we want, which is to zoom the map to the extent of TX
+// regardless of size of viewport
 var map = new mapboxgl.Map({
 	container: 'map', // container id
-	style: 'mapbox://styles/core-gis/ckq137o0x11su18qzogi3e52t', // stylesheet location; this is the v2.3.1 style with markers turned OFF
-	center: [-99.228516, 31.203405], // starting position [lng, lat]
+	style: 'mapbox://styles/web-charlesbuttfdn/cloqecrs0003i01rcc34e7tvx', // CBF stylesheet location; this is the v2.3.1 style with markers turned OFF
+	fitBounds: ([
+		[-108, 25],
+		[-88,37]
+	]),
+	/*center: [-98.3,31], // starting position [lng, lat]
 	zoom: 5.5, // starting zoom
+	*/
 	maxBounds: bounds // sets bounds as max
 });
 
@@ -41,6 +50,7 @@ map.on('click', 'school_house_senate_districts_UNION-poly', function (e) {
 
 
 
+/*
 // make appropriate legend entry visible, and remove whichever zoom-to-districts dropdown we're not going to be using
 if (showHouseDistricts) {
 	document.getElementById("house_districts_legend_entry").style.display = "inline";
@@ -63,9 +73,7 @@ if (showSchoolDistricts) {
 } else {
 	removeElement("school-districts-control");
 }
-
-
-
+*/
 
 
 
@@ -117,7 +125,7 @@ map.on('load', function () {
 			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vThQIAx3AYYtRLgKzCfodIThk1_YqZmFCVSCLATbozYnbVi_hTaoIU3eDDxP6L9-3ofkELApw4L_2sk/pub?gid=1352187007&single=true&output=tsv",
 			'sourceName': 'raising-school-leaders',
 			'layerName': 'raising-school-leaders-points',
-			'circleColor': '#41B6E6',
+			'circleColor': '#418FDE',
 			'circleRadius': 4,
 			'legendID': 'raising_school_leaders',
 			'visibleOnLoad': true,
@@ -133,7 +141,7 @@ map.on('load', function () {
 			'layerName': 'raising-blended-learners-campuses-points', // layer name, used internally
 			// 'icon': 'raising_blended_learners_campuses_large', // to make this an icon layer, use this property for the icon image name, using the name from Mapbox
 			// 'iconSize': 0.1, // a size multiplier for the icon, which should be saved at 1/x times the intended initial display size, so that when it gets scaled up on zooming in it will still look good
-			'circleColor': '#FDB500', // to get a circle layer, use this property specifying the colour
+			'circleColor': '#AB2328', // to get a circle layer, use this property specifying the colour
 			'circleRadius': 4,
 			'legendID': 'raising_blended_learners_campuses', // OPTIONAL: the id in the legend, so we can set it to active or inactive as appropriate. Simply leave out for layers that don't appear in the legend
 			'scalingFactor': 25, // OPTIONAL: how much to magnify the markers by when zooming in.  Defaults to 25 if not specified; set to 1 to have no zoom at all.
@@ -147,7 +155,7 @@ map.on('load', function () {
 			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbKunE8ofTAowmbXsNosyx4Hi7aHdSGwrWV5YQmcuxuhOHnBfYmir5VVA5C8VqFCDMjqAw3I9e5Im/pub?gid=697505768&single=true&output=tsv",
 			'sourceName': 'charles-butt-scholars',
 			'layerName': 'charles-butt-scholars-points',
-			'circleColor': '#F15C22',
+			'circleColor': '#00B2A9',
 			'circleRadius': 4,
 			'legendID': 'charles_butt_scholars',
 			'visibleOnLoad': true
@@ -160,7 +168,7 @@ map.on('load', function () {
 			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vQchMpQoBdYmzqkNASTNdXIf6cmDbYm3K_rdcNGrp1-KCcT9N97h5CjhvhCrgj6gky6uSQra-4FZtuV/pub?gid=956631515&single=true&output=tsv",
 			'sourceName': 'raising-texas-teachers',
 			'layerName': 'raising-texas-teachers-points',
-			'circleColor': '#99401b',
+			'circleColor': '#E57410',
 			'circleRadius': 4,
 			'legendID': 'raising_texas_teachers',
 			'visibleOnLoad': true
@@ -214,20 +222,39 @@ map.on('load', function () {
 			{
 				'sourceName': 'state-school-districts',
 				'sourceID': 'texas_districts_1882_v4',
-				'sourceURL': 'mapbox://core-gis.b73007d3',
+				'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
 				'lineLayerName': 'state-school-districts-lines',
-				'lineColor': 'rgba(117, 137, 77, 0.5)',
+				'lineColor': 'rgba(117, 137, 77, 0.3)',
 				'legendID': 'state_school_districts',
 				'displayBehind': 'raising-school-leaders-points',
 				'polygonLayerName': 'state-school-districts-poly',
 				'polygonFillColor': 'rgba(153, 110, 0, 0)',
 				'polygonOutlineColor':'rgba(153, 110, 0, 0)',
-				'visibleOnLoad': true
+				'visibleOnLoad': false
 			}
 		);
 	}
-
-
+/*
+// ESC = Educational Service Centers	
+	if (showESCRegions) {
+	addVectorLayer(
+		map,
+		{
+			'sourceName': 'esc-regions',
+			'sourceID': 'ESC_Regions-6oqjhv',
+			'sourceURL': 'mapbox://web-charlesbuttfdn.30mozefe',
+			'lineLayerName': 'esc-regions-lines',
+			'lineColor': 'rgba(61, 57, 53, 0.7)',
+			'legendID': 'esc_regions',
+			'displayBehind': 'raising-school-leaders-points',
+			'polygonLayerName': 'esc-regions-poly',
+			'polygonFillColor': 'rgba(153, 110, 0, 0)',
+			'polygonOutlineColor':'rgba(153, 110, 0, 0)',
+			'visibleOnLoad': false
+		}
+	);
+}
+*/
 	// This is a special cases: the layer is never displayed, but can be used to set what will appear in popups when someone clicks on the map
 	addVectorLayer(
 		map,
@@ -263,7 +290,11 @@ the location of the click, with description HTML from its properties
 // generalised code to add district info
 function expandDistrictInfo(district) {
 // make sure we have a district to use
-if (district.length > 0 && district[0].layer.id === 'school_house_senate_districts_UNION-poly') {
+if (
+		(showHouseDistricts || showSenateDistricts) &&
+		district.length > 0 &&
+		district[0].layer.id === 'school_house_senate_districts_UNION-poly'
+	) {
 	data = district[0].properties;
 	var html = "";
 	html += "<span class='varname'>";
@@ -303,6 +334,9 @@ map.on('zoomend', function() { updateStatsBox(); });
 function fillpopup_rbl(features){
 	let html = "";
 	for (i in features) {
+		if (i > 0) {
+			html += "<hr class='divider'/>";
+		}
 		let data = features[i];
 		let endyear = parseInt(data.year) + 3 // 4-year terms for this program
 		if (data.url === undefined) {
@@ -318,8 +352,6 @@ function fillpopup_rbl(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += '<br /><span class="attribute"><a href="https://www.raiseyourhandtexas.org/foundation/blended/blended-site-visits/">Request a site visit</a></span>';
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function
@@ -354,12 +386,6 @@ function fillpopup_cbs(features){
 		html = html + "<br />"
 		html = html + "<span class='varname'>Year: </span> <span class='attribute'>" + data.year + "</span>";
 		html = html + "<br />"
-		html = html + "<span class='attribute'>" + '<a href="' + data.cb_scholar_url + '"' + " target='_blank'" + '>' + data.link + '</a>'+"</span>";
-		if (data.count > 1) {
-			html = html + "<br />"
-			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
-		}
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function
@@ -389,6 +415,9 @@ map.on('click', 'raising-texas-teachers-points', function (e) {
 function fillpopup_rtt(features){
 	var html = "";
 	for (i in features) {
+		if (i > 0) {
+			html += "<hr class='divider'/>";
+		}
 		let data = features[i];
 		html = html + "<span class='varname'>Institute: </span> <span class='attribute'>" + data.university_name + "</span>";
 		html = html + "<br />"
@@ -397,7 +426,6 @@ function fillpopup_rtt(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function
@@ -429,6 +457,9 @@ map.on('click', 'raising-school-leaders-points', function (e) {
 function fillpopup_rsl(features){
 	let html = "";
 	for (i in features) {
+		if (i > 0) {
+			html += "<hr class='divider'/>";
+		}
 		let data = features[i];
 		html = html + "<span class='varname'>Institute: </span> <span class='attribute'>" + data.institute + "</span>";
 		html = html + "<br />"
@@ -443,7 +474,6 @@ function fillpopup_rsl(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += "<hr class='divider'/>";
 	}
 	return html;
 	//this will return the string to the calling function

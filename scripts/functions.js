@@ -1,3 +1,12 @@
+// A helper to see if the page has finished loading.
+function ready(fn) {
+  if (document.readyState !== "loading") {
+    fn();
+    return;
+  }
+  document.addEventListener("DOMContentLoaded", fn);
+}
+
 // store this as a global variable so that the stats box can always access the current value
 var filterStates = {
 	year: false,
@@ -13,9 +22,9 @@ var urlParams = {};
 window.location.href.replace(
 	/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {urlParams[key] = value;}
 );
-var showHouseDistricts = true;
+var showHouseDistricts = false;
 var showSenateDistricts = false;
-var showSchoolDistricts = false;
+var showSchoolDistricts = true;
 if (
 	(
 		urlParams["districts"] && (
@@ -82,14 +91,32 @@ else {
 }
 // now we can check the two showXDistricts variables anywhere that we might introduce House or Senate districts to decide which one to show
 
+// set min, max, and starting year parameters based on time slider configuration & URL parameters
 if (urlParams["year"]) {
-	filterStates.year = urlParams["year"];
-} else {
-	filterStates.year = 2021;
+	const year = parseInt(urlParams["year"]);
+	if (Number.isInteger(year)) {
+		filterStates.year = year;
+	}
 }
+let slider;
+let minYear;
+let maxYear;
+ready(function() {
+	slider = document.getElementById('slider');
+	minYear = parseInt(slider.min);
+	maxYear = parseInt(slider.max);
+	if ((!filterStates.year) || (filterStates.year > maxYear)) {
+		filterStates.year = maxYear;
+	} else if (filterStates.year < minYear) {
+		filterStates.year = minYear;
+	}
+});
+
+// zoom to a district if request in the URL parameters
 if (urlParams["zoomto"]) {
 	filterStates.district.val = urlParams["zoomto"];
 }
+
 
 
 
@@ -141,11 +168,12 @@ function showHideAlumni(showOnly=false, hideOnly=false) {
 //zoomToPolygon() zooms the map to the district extent
 
 function runWhenLoadComplete() {
+	zoomToPolygon('', '-108,25,-88,37,0', '');
 	if (!map.getLayer('raising-school-leaders-points') || !map.getLayer('charles-butt-scholars-points') || !map.getLayer('raising-blended-learners-campuses-points') || !map.getLayer('raising-texas-teachers-points')) {
 		setTimeout(runWhenLoadComplete, 100);
 	}
 	else {
-		moveYearSlider('slider', 'active-year', 0); // calling this with a 0 increment will make sure that the filter, caption and slider position all match.  Without doing this, the browser seems to keep the slider position between refreshes, but reset the filter and caption so they get out of sync.
+		moveYearSlider('active-year', 0); // calling this with a 0 increment will make sure that the filter, caption and slider position all match.  Without doing this, the browser seems to keep the slider position between refreshes, but reset the filter and caption so they get out of sync.
 		if (showHouseDistricts) {
 			populateZoomControl("house-districts-control", "state-house-districts", "District", "Texas House Districts");
 			map.moveLayer('state-house-districts-lines');
@@ -167,6 +195,7 @@ function runWhenLoadComplete() {
 			map.moveLayer('raising-texas-teachers-points');
 		}, 100);
 	}
+	zoomToPolygon('', '-108,25,-88,37,0', '');
 }
 
 function populateZoomControl(selectID, sourceID, fieldName, layerName, hideMaskLayer=true) {
@@ -315,15 +344,7 @@ function setFilter(sourceID) {
 		);
 		map.setPaintProperty(
 			sourceID,
-			'circle-opacity',
-			[
-				"interpolate",
-				["linear"],
-				['+', ['to-number', ['get', 'year']], (termLength - 1)],
-				2000, 0.2,
-				(filterStates.year - 1), 0.2,
-				filterStates.year, 1
-			]
+			'circle-opacity', 0.3
 		);
 	} else {
 		console.log('something`s wrong, there should never be no year filter', filterStates);
@@ -341,12 +362,8 @@ function updateYearSlider(numberID, year) {
 	setTimeout(function(){ updateStatsBox(); }, 100);
 }
 
-function moveYearSlider(sliderID, numberID, increment, loop=false) {
-	slider = document.getElementById(sliderID);
-	minYear = parseInt(slider.min, 10);
+function moveYearSlider(numberID, increment, loop=false) {
 	currentYear = filterStates.year ? parseInt(filterStates.year, 10) : parseInt(slider.value, 10);
-	maxYear = parseInt(slider.max, 10);
-
 	desiredYear = currentYear + increment;
 
 	if (loop) { // if we're looping then wrap any overflow around
@@ -361,28 +378,28 @@ function moveYearSlider(sliderID, numberID, increment, loop=false) {
 	}
 
 	slider.value = desiredYear;
-	updateURL(district = filterStates.district ? filterStates.district.val : '0');
 	updateYearSlider(numberID, desiredYear);
 	if (desiredYear < popupYear) {
 		popup.remove();
 	}
+	updateURL(district = filterStates.district ? filterStates.district.val : '0');
 }
 
-function animateYearSlider(sliderID, numberID, delay) {
+function animateYearSlider(numberID, delay) {
 	if (animationRunning) {
-		moveYearSlider(sliderID, numberID, 1, loop=true);
+		moveYearSlider(numberID, 1, loop=true);
 		setTimeout(
-			function() {animateYearSlider(sliderID, numberID, delay)},
+			function() {animateYearSlider(numberID, delay)},
 			delay
 		);
 	}
 }
 
-function startYearAnimation(sliderID, numberID, delay, playID, stopID) {
+function startYearAnimation(numberID, delay, playID, stopID) {
 	animationRunning = true;
 	document.getElementById(playID).style.display = 'none';
 	document.getElementById(stopID).style.display = 'inline';
-	animateYearSlider(sliderID, numberID, delay);
+	animateYearSlider(numberID, delay);
 }
 
 function stopYearAnimation(playID, stopID) {
@@ -393,7 +410,7 @@ function stopYearAnimation(playID, stopID) {
 
 function updateURL(district='0') {
 	var newURL = window.location.pathname;
-	var newTitle = 'Raise Your Hand Texas programs'
+	var newTitle = 'Charles Butt Foundation programs'
 	if (showHouseDistricts) {
 		newURL += '?districts=house';
 	} else if (showSenateDistricts) {
