@@ -7,7 +7,7 @@
 	Layers are added in the map.on('load') call towards the end.
 
 	For a layer to appear in the legend, it must have a corresponding <li> in <ul class='legend-labels'>, and the id for that item has to be given to addPointLayer() or addVectorLayer() as the legendID property.
-	For a legend item to show the right icon, there must be a corresponding rule set in css/ryht-legislative-style.css
+	For a legend item to show the right icon, there must be a corresponding rule set in css/cbf-programs-style.css
 
 	For a layer to appear in the Zoom to Districts control, it must have a polygon layer (even if that's kept invisible) and have two corresponding definitions:
 		1) a <select> element defined in the section of <div id="mySidenav"> that's labelled with the comment: !--Drop down controls--
@@ -45,14 +45,11 @@
 				<b>Map:</b> Visualize the growth of Charles Butt Foundation Programs (Raising Blended Learners, Raising School Leaders, and Raising Texas Teachers: University Partners and Charles Butt Scholars) from 2008 to the present.
 				<br>
 				<br>
-				<b>Interaction:</b> In the sidebar on the left hand side, click the Play, Stop, Skip Forward, or Skip Backward buttons to explore the reach of our programs across the state of Texas. You can toggle viewing or hiding each Program, and view by House, Senate, or School District.
+				<b>Interaction:</b> In the sidebar on the left hand side, click the Play, Stop, Skip Forward, or Skip Backward buttons to explore the reach of our programs across the state of Texas. You can toggle viewing or hiding each Program, and view by School District or Educational Service Center region.
 				<br>
 				<br>
 				Finally, you can click on each dot to learn more about a particular program, partnership, or recipient.
-				Click the orange button below to explore the programs.
-				<br>
-				<br>
-				<i>The Charles Butt Foundation Programs Map is a data visualization platform developed by <a href="https://www.coregis.net">Core GIS</a>.</i>
+				Click the blue button below to begin exploring the programs.
 			</p>
 			<br />
 			<span class='button'>Start Exploring! &nbsp;➔</span>
@@ -70,7 +67,7 @@
 
 	<div id="console">
 	  <div class="hide-for-small">
-		<img class="style-logo" src="images/cbf_logo_curved_bottom.png" alt="Charles Butt Foundation logo">
+		<a href="https://charlesbuttfdn.org/" target="_blank"><img class="style-logo" src="images/cbf_logo_curved_bottom.png" alt="Charles Butt Foundation logo"></a>
 	  </div>
 		<div id='legend' class='legend hide-for-small'>
 			<div class="header">Toggle visibility</div>
@@ -92,7 +89,7 @@
 
 			<select id="school-districts-control" onchange="zoomToPolygon('state-school-districts', this.value, 'NAME');"></select>
 
-			<!-- House/Senate districts switcher; this will need to be changed to School/ESC districts in Phase 2 -->
+			<!-- House/Senate districts switcher; this will need to be changed to School/ESC regions in Phase 2 -->
 
 
 			<p onClick="zoomToPolygon('', '-108,25,-88,37,0', '');" class="zoomoutlink"><span id="texas_icon" style="cursor:pointer"></span>View whole state
@@ -159,7 +156,7 @@
 				<span id='slider_forward' onclick="moveYearSlider('active-year', 1);" title='Go forward one year'><img src="images/skip_forward.svg"></span>
 			</div> <!-- id='slidercontrols' -->
 
-			<div class='map-credit'>Source: <a href="https://www.https://charlesbuttfdn.org/" target="_blank">Charles Butt Foundation</a></div>
+			<div class='map-credit'>Source: <a href="https://charlesbuttfdn.org/" target="_blank">Charles Butt Foundation</a></div>
 			<div class='map-credit'>Map design by <a href="http://www.coregis.net/" target="_blank">CORE GIS</a></div>
 		</div> <!-- end of div id="legend" -->
 

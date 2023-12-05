@@ -352,7 +352,6 @@ function fillpopup_rbl(features){
 			html = html + "<br />"
 			html = html + "<span class='varname'>Team of: </span> <span class='attribute'>" + data.count + " people</span>";
 		}
-		html += '<br /><span class="attribute"><a href="https://charlesbuttfdn.org//foundation/blended/blended-site-visits/">Request a site visit</a></span>';
 	}
 	return html;
 	//this will return the string to the calling function
