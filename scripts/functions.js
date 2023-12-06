@@ -37,45 +37,7 @@ if (!urlParams["districts"]) {
 		urlParams["districts"] = urlParams["Display"];
 	}
 }
-// set district type if appropriate
-if (
-		urlParams["districts"] && (
-			urlParams["districts"].toLowerCase().indexOf("isd") > -1
-			||
-			urlParams["districts"].toLowerCase() === 'i'
-		)
-	) {
-	showSchoolDistricts = true;
-	filterStates.district = {"field": "NAME"};
-} else if (
-		urlParams["districts"] && (
-			urlParams["districts"].toLowerCase().indexOf("esc") > -1
-			||
-			urlParams["districts"].toLowerCase() === 'e'
-		)
-	) {
-	showESCRegions = true;
-	filterStates.district = {"field": "CITY"};
-} else if (
-		urlParams["districts"] && (
-			urlParams["districts"].toLowerCase().indexOf("sen") > -1
-			||
-			urlParams["districts"].toLowerCase() === 's'
-		)
-	) {
-	showSenateDistricts = true;
-	filterStates.district = {"field": "senate_dist"};
-} else if (
-		urlParams["districts"] && (
-			urlParams["districts"].toLowerCase().indexOf("hou") > -1
-			||
-			urlParams["districts"].toLowerCase() === 'h'
-		)
-	) {
-	showHouseDistricts = true;
-	filterStates.district = {"field": "house_dist"};
-}
-// now we can check the two showXDistricts variables anywhere that we might introduce House or Senate districts to decide which one to show
+
 
 // set min, max, and starting year parameters based on time slider configuration & URL parameters
 if (urlParams["year"]) {
