@@ -447,11 +447,13 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer=true) {
 			showSchoolDistricts = true;
 			showESCRegions = false;
 			showHideLayer('esc-regions-lines', markerNames=['esc_regions'], showOnly=false, hideOnly=true);
+			filterStates.district.field = 'NAME';
 		}
 		if (sourceID === 'esc-regions') {
 			showESCRegions = true;
 			showSchoolDistricts = false;
 			showHideLayer('state-school-districts-lines', markerNames=['state_school_districts'], showOnly=false, hideOnly=true);
+			filterStates.district.field = 'CITY';
 		}
 		coords = coords.split(",");
 		bbox = [
@@ -532,6 +534,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer=true) {
 
 function updateStatsBox() {
 	if (filterStates.district && filterStates.district.val) { // only do anything if we have a selected district
+		console.log(filterStates);
 		document.getElementById('statsBox').style.opacity = 1;
 		if (filterStates.district.field.indexOf("house") > -1) {
 			document.getElementById("stats.districtType").innerText = "House District";
@@ -541,6 +544,11 @@ function updateStatsBox() {
 			document.getElementById("stats.districtType").innerText = "";
 		}
 		document.getElementById("stats.districtName").innerText = decodeURIComponent(filterStates.district.val);
+		if (filterStates.district.field.indexOf("CITY") > -1) {
+			document.getElementById("stats.districtSuffix").innerText = " ESC";
+		} else {
+			document.getElementById("stats.districtSuffix").innerText = "";
+		}
 		document.getElementById("stats.year").innerText = filterStates.year;
 		for (let i in loadedPointLayers) {
 			if (loadedPointLayers[i][0].includes("raising-blended-learners")) {
