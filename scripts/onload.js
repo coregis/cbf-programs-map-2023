@@ -9,7 +9,7 @@ var bounds = [
 	];
 
 // skip the landing page if we already have ?=arguments
-if (!urlParams["districts"]) {
+if (Object.keys(urlParams).length < 1) {
 	document.getElementById('landing').style.visibility = "visible";
 }
 
@@ -83,7 +83,7 @@ if (showSchoolDistricts) {
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
-for (i = 0; i < coll.length; i++) {
+for (let i = 0; i < coll.length; i++) {
 	coll[i].addEventListener("click", function() {
 		this.classList.toggle("active");
 		var content = this.nextElementSibling;
@@ -122,7 +122,7 @@ map.on('load', function () {
 	addPointLayer(
 		map,
 		{
-			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vThQIAx3AYYtRLgKzCfodIThk1_YqZmFCVSCLATbozYnbVi_hTaoIU3eDDxP6L9-3ofkELApw4L_2sk/pub?gid=1352187007&single=true&output=tsv",
+			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5t_uwUWORpXDPAXiOV4HuxTaEqOk6Rcp24pzrp8q0nz55dcgdxlU5HpqmkXwoqvC4Um7QEE5pJaMT/pub?gid=1352187007&single=true&output=tsv",
 			'sourceName': 'raising-school-leaders',
 			'layerName': 'raising-school-leaders-points',
 			'circleColor': '#418FDE',
@@ -136,7 +136,7 @@ map.on('load', function () {
 	addPointLayer(
 		map,
 		{
-			'tsvURL': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSQkbvKo3iSdUOOnV55xZWSjonEFPD7ZtXZb1BopnVxuwPgzvYVIj22MvqZSX8crWhL3y5EtEmPNU5K/pub?gid=0&single=true&output=tsv', // Whole link for the CSV output from Google Sheets
+			'tsvURL': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVgWMzQvRj8-EQ3IIgMiH8dubC8ihqq8WFPWy5GQOpQAJfv1rGz3RsyZNwdutE9Z16VPVq5nxSBCI3/pub?gid=0&single=true&output=tsv', // Whole link for the CSV output from Google Sheets
 			'sourceName': 'raising-blended-learners-campuses', // the data source name, used internally
 			'layerName': 'raising-blended-learners-campuses-points', // layer name, used internally
 			// 'icon': 'raising_blended_learners_campuses_large', // to make this an icon layer, use this property for the icon image name, using the name from Mapbox
@@ -152,7 +152,7 @@ map.on('load', function () {
 	addPointLayer(
 		map,
 		{
-			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbKunE8ofTAowmbXsNosyx4Hi7aHdSGwrWV5YQmcuxuhOHnBfYmir5VVA5C8VqFCDMjqAw3I9e5Im/pub?gid=697505768&single=true&output=tsv",
+			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLm7jm5Tgepbhao611Amu1Cm7-vdo9VESvP9188YI0RS6gETLFtq6tHfFJlfwhimfio79cMykmmiMl/pub?gid=697505768&single=true&output=tsv",
 			'sourceName': 'charles-butt-scholars',
 			'layerName': 'charles-butt-scholars-points',
 			'circleColor': '#00B2A9',
@@ -165,7 +165,7 @@ map.on('load', function () {
 	addPointLayer(
 		map,
 		{
-			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vQchMpQoBdYmzqkNASTNdXIf6cmDbYm3K_rdcNGrp1-KCcT9N97h5CjhvhCrgj6gky6uSQra-4FZtuV/pub?gid=956631515&single=true&output=tsv",
+			'tsvURL': "https://docs.google.com/spreadsheets/d/e/2PACX-1vRW1KdSVNHDi6ivUlsfiKg2k75CwxgqAacXeIJS3FQqL-Vvtwd7QwLnuc9YXFUV3gOu7QRdaNfPwGTO/pub?gid=956631515&single=true&output=tsv",
 			'sourceName': 'raising-texas-teachers',
 			'layerName': 'raising-texas-teachers-points',
 			'circleColor': '#E57410',
@@ -175,7 +175,7 @@ map.on('load', function () {
 		}
 	);
 
-
+/* commenting out legislative districts as we probably won't use them in this map
 	if (showSenateDistricts) {
 		addVectorLayer(
 			map,
@@ -215,28 +215,25 @@ map.on('load', function () {
 			}
 		);
 	}
-
-	if (showSchoolDistricts) {
-		addVectorLayer(
-			map,
-			{
-				'sourceName': 'state-school-districts',
-				'sourceID': 'texas_districts_1882_v4',
-				'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
-				'lineLayerName': 'state-school-districts-lines',
-				'lineColor': 'rgba(117, 137, 77, 0.3)',
-				'legendID': 'state_school_districts',
-				'displayBehind': 'raising-school-leaders-points',
-				'polygonLayerName': 'state-school-districts-poly',
-				'polygonFillColor': 'rgba(153, 110, 0, 0)',
-				'polygonOutlineColor':'rgba(153, 110, 0, 0)',
-				'visibleOnLoad': false
-			}
-		);
-	}
-/*
-// ESC = Educational Service Centers	
-	if (showESCRegions) {
+*/
+	addVectorLayer(
+		map,
+		{
+			'sourceName': 'state-school-districts',
+			'sourceID': 'texas_districts_1882_v4',
+			'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
+			'lineLayerName': 'state-school-districts-lines',
+			'lineColor': 'rgba(117, 137, 77, 0.3)',
+			'legendID': 'state_school_districts',
+			'displayBehind': 'raising-school-leaders-points',
+			'polygonLayerName': 'state-school-districts-poly',
+			'polygonFillColor': 'rgba(153, 110, 0, 0)',
+			'polygonOutlineColor':'rgba(153, 110, 0, 0)',
+			'visibleOnLoad': showSchoolDistricts,
+			'usedInZoomControl': true
+		}
+	);
+// ESC = Educational Service Centers
 	addVectorLayer(
 		map,
 		{
@@ -250,11 +247,10 @@ map.on('load', function () {
 			'polygonLayerName': 'esc-regions-poly',
 			'polygonFillColor': 'rgba(153, 110, 0, 0)',
 			'polygonOutlineColor':'rgba(153, 110, 0, 0)',
-			'visibleOnLoad': false
+			'visibleOnLoad': showESCRegions,
+			'usedInZoomControl': true
 		}
 	);
-}
-*/
 	// This is a special cases: the layer is never displayed, but can be used to set what will appear in popups when someone clicks on the map
 	addVectorLayer(
 		map,
@@ -333,7 +329,7 @@ map.on('zoomend', function() { updateStatsBox(); });
 
 function fillpopup_rbl(features){
 	let html = "";
-	for (i in features) {
+	for (let i in features) {
 		if (i > 0) {
 			html += "<hr class='divider'/>";
 		}
@@ -380,7 +376,7 @@ map.on('click', 'charles-butt-scholars-points', function (e) {
 
 function fillpopup_cbs(features){
 	let html = "";
-	for (i in features) {
+	for (let i in features) {
 		let data = features[i];
 		html = html + "<span class='varname'>Scholar's Name: </span> <span class='attribute'>" + data.full_name + "</span>";
 		html = html + "<br />"
@@ -414,7 +410,7 @@ map.on('click', 'raising-texas-teachers-points', function (e) {
 
 function fillpopup_rtt(features){
 	var html = "";
-	for (i in features) {
+	for (let i in features) {
 		if (i > 0) {
 			html += "<hr class='divider'/>";
 		}
@@ -456,7 +452,7 @@ map.on('click', 'raising-school-leaders-points', function (e) {
 
 function fillpopup_rsl(features){
 	let html = "";
-	for (i in features) {
+	for (let i in features) {
 		if (i > 0) {
 			html += "<hr class='divider'/>";
 		}
