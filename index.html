@@ -77,7 +77,8 @@
 				<li onClick="showHideLayer('raising-blended-learners-campuses-points', markerNames=['raising_blended_learners_campuses']);" style="cursor: pointer;"><span id="raising_blended_learners_campuses"></span>Raising Blended Learners (Districts)</li>
 				<li onClick="showHideLayer('raising-school-leaders-points', markerNames=['raising_school_leaders']);" style="cursor: pointer;"><span id="raising_school_leaders"></span>Raising School Leaders Participants</li>
 				<li onClick="showHideLayer('raising-texas-teachers-points', markerNames=['raising_texas_teachers', 'raising_texas_teachers_icon']);" style="cursor: pointer;"><span id="raising_texas_teachers"></span>Raising Texas Teachers:<br />(University Partners)</li>
-				<li id="school_districts_legend_entry" style="display: none;" onClick="showHideLayer('state-school-districts-lines', markerNames=['state_school_districts']);" style="cursor: pointer !important;"><span id="state_school_districts" class="inactive"></span>State School Districts</li>
+				<li id="school_districts_legend_entry" onClick="showHideLayer('state-school-districts-lines', markerNames=['state_school_districts']);" style="cursor: pointer !important;"><span id="state_school_districts" class="inactive"></span>State School Districts</li>
+				<li id="esc_legend_entry" onClick="showHideLayer('esc-regions-lines', markerNames=['esc_regions']);" style="cursor: pointer !important;"><span id="esc_regions" class="inactive"></span>Education Service Centers</li>
 			</ul>
 		</div> <!-- end of div class='legend-scale' -->
 
@@ -89,7 +90,7 @@
 
 			<select id="school-districts-control" onchange="zoomToPolygon('state-school-districts', this.value, 'NAME');"></select>
 
-			<!-- House/Senate districts switcher; this will need to be changed to School/ESC regions in Phase 2 -->
+			<select id="esc-regions-control" onchange="zoomToPolygon('esc-regions', this.value, 'CITY');"></select>
 
 
 			<p onClick="zoomToPolygon('', '-108,25,-88,37,0', '');" class="zoomoutlink"><span id="texas_icon" style="cursor:pointer"></span>View whole state

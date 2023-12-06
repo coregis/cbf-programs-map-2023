@@ -9,7 +9,7 @@ var bounds = [
 	];
 
 // skip the landing page if we already have ?=arguments
-if (!urlParams["districts"]) {
+if (Object.keys(urlParams).length < 1) {
 	document.getElementById('landing').style.visibility = "visible";
 }
 
@@ -83,7 +83,7 @@ if (showSchoolDistricts) {
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
-for (i = 0; i < coll.length; i++) {
+for (let i = 0; i < coll.length; i++) {
 	coll[i].addEventListener("click", function() {
 		this.classList.toggle("active");
 		var content = this.nextElementSibling;
@@ -175,7 +175,7 @@ map.on('load', function () {
 		}
 	);
 
-
+/* commenting out legislative districts as we probably won't use them in this map
 	if (showSenateDistricts) {
 		addVectorLayer(
 			map,
@@ -215,28 +215,25 @@ map.on('load', function () {
 			}
 		);
 	}
-
-	if (showSchoolDistricts) {
-		addVectorLayer(
-			map,
-			{
-				'sourceName': 'state-school-districts',
-				'sourceID': 'texas_districts_1882_v4',
-				'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
-				'lineLayerName': 'state-school-districts-lines',
-				'lineColor': 'rgba(117, 137, 77, 0.3)',
-				'legendID': 'state_school_districts',
-				'displayBehind': 'raising-school-leaders-points',
-				'polygonLayerName': 'state-school-districts-poly',
-				'polygonFillColor': 'rgba(153, 110, 0, 0)',
-				'polygonOutlineColor':'rgba(153, 110, 0, 0)',
-				'visibleOnLoad': false
-			}
-		);
-	}
-/*
+*/
+	addVectorLayer(
+		map,
+		{
+			'sourceName': 'state-school-districts',
+			'sourceID': 'texas_districts_1882_v4',
+			'sourceURL': 'mapbox://web-charlesbuttfdn.117fbef3',
+			'lineLayerName': 'state-school-districts-lines',
+			'lineColor': 'rgba(117, 137, 77, 0.3)',
+			'legendID': 'state_school_districts',
+			'displayBehind': 'raising-school-leaders-points',
+			'polygonLayerName': 'state-school-districts-poly',
+			'polygonFillColor': 'rgba(153, 110, 0, 0)',
+			'polygonOutlineColor':'rgba(153, 110, 0, 0)',
+			'visibleOnLoad': showSchoolDistricts,
+			'usedInZoomControl': true
+		}
+	);
 // ESC = Educational Service Centers
-	if (showESCRegions) {
 	addVectorLayer(
 		map,
 		{
@@ -250,11 +247,10 @@ map.on('load', function () {
 			'polygonLayerName': 'esc-regions-poly',
 			'polygonFillColor': 'rgba(153, 110, 0, 0)',
 			'polygonOutlineColor':'rgba(153, 110, 0, 0)',
-			'visibleOnLoad': false
+			'visibleOnLoad': showESCRegions,
+			'usedInZoomControl': true
 		}
 	);
-}
-*/
 	// This is a special cases: the layer is never displayed, but can be used to set what will appear in popups when someone clicks on the map
 	addVectorLayer(
 		map,
@@ -333,7 +329,7 @@ map.on('zoomend', function() { updateStatsBox(); });
 
 function fillpopup_rbl(features){
 	let html = "";
-	for (i in features) {
+	for (let i in features) {
 		if (i > 0) {
 			html += "<hr class='divider'/>";
 		}
@@ -380,7 +376,7 @@ map.on('click', 'charles-butt-scholars-points', function (e) {
 
 function fillpopup_cbs(features){
 	let html = "";
-	for (i in features) {
+	for (let i in features) {
 		let data = features[i];
 		html = html + "<span class='varname'>Scholar's Name: </span> <span class='attribute'>" + data.full_name + "</span>";
 		html = html + "<br />"
@@ -414,7 +410,7 @@ map.on('click', 'raising-texas-teachers-points', function (e) {
 
 function fillpopup_rtt(features){
 	var html = "";
-	for (i in features) {
+	for (let i in features) {
 		if (i > 0) {
 			html += "<hr class='divider'/>";
 		}
@@ -456,7 +452,7 @@ map.on('click', 'raising-school-leaders-points', function (e) {
 
 function fillpopup_rsl(features){
 	let html = "";
-	for (i in features) {
+	for (let i in features) {
 		if (i > 0) {
 			html += "<hr class='divider'/>";
 		}

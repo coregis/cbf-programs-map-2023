@@ -267,7 +267,7 @@ ul{
   font-weight: 700;
   line-height: 20px;
   margin-bottom: 10px;
-  margin-top:  0px;	
+  margin-top:  0px;
 }
 
 .header-dropdown {
@@ -440,6 +440,14 @@ p.header-explore {
 #state_school_districts
 {
 	background:url(../markers/state_school_districts.svg) left center;
+	width:11px;
+	height:16px;
+	display: block;
+	float: left;
+}
+#esc_regions
+{
+	background:url(../markers/esc_regions.svg) left center;
 	width:11px;
 	height:16px;
 	display: block;
@@ -781,7 +789,7 @@ span#slider_stop {
   font-weight: 700;
   line-height: 20px;
   margin-bottom: 10px;
-}	
+}
 
 .version-text {
   font-size: 70%;
@@ -793,5 +801,5 @@ span#slider_stop {
   font-family: 'Work Sans', sans-serif;
   font-style: italic;
   font-size: 9px;
-  color: #505050;	
+  color: #505050;
 }
