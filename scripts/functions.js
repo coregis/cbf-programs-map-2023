@@ -99,9 +99,11 @@ ready(function() {
 });
 
 // zoom to a district if request in the URL parameters
+console.log(urlParams);
 if (urlParams["zoomto"]) {
-	filterStates.district.val = urlParams["zoomto"];
+	filterStates.district.val = decodeURIComponent(urlParams["zoomto"]);
 }
+console.log(filterStates);
 
 
 
@@ -152,7 +154,6 @@ function showHideAlumni(showOnly=false, hideOnly=false) {
 //zoomToPolygon() zooms the map to the district extent
 
 function runWhenLoadComplete() {
-	zoomToPolygon('', '-108,25,-88,37,0', '', false);
 	if (!map.getLayer('raising-school-leaders-points') || !map.getLayer('charles-butt-scholars-points') || !map.getLayer('raising-blended-learners-campuses-points') || !map.getLayer('raising-texas-teachers-points')) {
 		setTimeout(runWhenLoadComplete, 100);
 	}
@@ -181,20 +182,18 @@ function runWhenLoadComplete() {
 			map.moveLayer('raising-texas-teachers-points');
 		}, 100);
 	}
-	zoomToPolygon('', '-108,25,-88,37,0', '', false);
 }
 
 function populateZoomControl(selectID, sourceID, fieldName, layerName, districtType, hideMaskLayer=true) {
 	polygons = getPolygons(sourceID, fieldName);
 	var select = document.getElementById(selectID);
 	select.options[0] = new Option(layerName, "-108,25,-88,37,0");
-	updateURL();
 	for (let i in polygons) {
 		select.options[select.options.length] = new Option(
 			polygons[i].name,
 			polygons[i].bbox.toString() + ',' + polygons[i].name
 		);
-		if (urlParams["district"] && urlParams["district"] === districtType) {
+		if (urlParams["districts"] && urlParams["districts"] === districtType) {
 			if (urlParams["zoomto"] && decodeURIComponent(urlParams["zoomto"].toString()) === polygons[i].name.toString()) {
 				zoomToPolygon(sourceID, polygons[i].bbox.toString() + ',' + polygons[i].name, fieldName);
 			}
@@ -534,7 +533,6 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer=true) {
 
 function updateStatsBox() {
 	if (filterStates.district && filterStates.district.val) { // only do anything if we have a selected district
-		console.log(filterStates);
 		document.getElementById('statsBox').style.opacity = 1;
 		if (filterStates.district.field.indexOf("house") > -1) {
 			document.getElementById("stats.districtType").innerText = "House District";
