@@ -231,13 +231,14 @@ ul{
 }
 
 .console-content {
-  flex-grow: 1;
-  margin: 0px;
   background-color: white;
+  border-bottom: 2px solid #ccc;
+  flex: 1 0 auto;
+  margin: 0px;
+  padding: 10px 20px;
 }
 
 .console-item {
-  padding: 10px 20px;
 }
 
 .small-logo {
