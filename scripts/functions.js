@@ -18,6 +18,20 @@ var popupYear = 0;
 // assign all new popups to this variable so we can remove them as needed
 var popup;
 
+// assemble list of ISDs to filter by to get an ESC
+const ESC_ISD_LUT = 'data/tbl_school_districts_ESC_regions_LUT.csv'
+var ESC_ISD_list = {};
+parseDelimitedTextFile(ESC_ISD_LUT, ',', '\n', function(data) {
+	for (let i in data) {
+		let ESC = data[i]['ESC_CITY'];
+		if (ESC in ESC_ISD_list) {
+			ESC_ISD_list[ESC].push(data[i]['NAME']);
+		} else {
+			ESC_ISD_list[ESC] = [data[i]['NAME']];
+		}
+	}
+});
+
 var urlParams = {};
 window.location.href.replace(
 	/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {urlParams[key] = value;}
@@ -37,7 +51,6 @@ if (!urlParams["districts"]) {
 		urlParams["districts"] = urlParams["Display"];
 	}
 }
-
 
 // set min, max, and starting year parameters based on time slider configuration & URL parameters
 if (urlParams["year"]) {
@@ -61,11 +74,9 @@ ready(function() {
 });
 
 // zoom to a district if request in the URL parameters
-console.log(urlParams);
 if (urlParams["zoomto"]) {
 	filterStates.district.val = decodeURIComponent(urlParams["zoomto"]);
 }
-console.log(filterStates);
 
 
 
@@ -274,11 +285,16 @@ function setFilter(sourceID) {
 			filters.push(['>', 'year', (filterStates.year - termLength).toString()]);
 		}
 		if (filterStates.district && filterStates.district.val) {
-			filters.push([
-				'==',
-				showSchoolDistricts ? 'school_district' : filterStates.district.field,
-				filterStates.district.val.toString()
-			]);
+			// special handling for ESCs because each consists of multiple ISDs
+			if (filterStates.district.field === 'CITY') {
+				filters.push(['in', 'school_district'].concat(ESC_ISD_list[filterStates.district.val]));
+			} else {
+				filters.push([
+					'==',
+					showSchoolDistricts ? 'school_district' : filterStates.district.field,
+					filterStates.district.val.toString()
+				]);
+			}
 		}
 		map.setFilter(sourceID, filters);
 		map.setPaintProperty(
@@ -589,7 +605,7 @@ function setVisibilityState(params) {
 }
 
 function addPointLayer(map, params) {
-	parseTSV(params.tsvURL, function(jsondata) {
+	delimitedTextToGeoJSON(params.tsvURL, '\t', '\r\n', function(jsondata) {
 		var visibilityState = setVisibilityState(params);
 		if (params.scalingFactor === undefined) { params.scalingFactor = 25; }
 		map.addSource(params.sourceName, {
@@ -720,13 +736,13 @@ function fillpopup(data) {
 
 
 
-function fetchFile(path, callback) {
+function fetchFile(path, lineSeparator, callback) {
 	var httpRequest = new XMLHttpRequest();
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState === 4) {
 			if (httpRequest.status === 200) {
-				// splitting on CRLFs gives us an array in which each item was one row of the original CSV
-				if (callback) callback(httpRequest.responseText.split('\r\n'));
+				// split to get an array in which each item was one row of the original file
+				if (callback) callback(httpRequest.responseText.split(lineSeparator));
 			}
 		}
 	};
@@ -775,8 +791,8 @@ function compileUniqueArray(features, ignoreFields=[]) {
 
 
 
-function normaliseHeaders(row) {
-	let headers = row.split('\t');
+function normaliseHeaders(row, delimiter) {
+	let headers = row.split(delimiter);
 	for (let i in headers) {
 		switch(headers[i].toLowerCase()) {
 				case 'longitude':
@@ -798,17 +814,43 @@ function normaliseHeaders(row) {
 }
 
 
+// parseDelimitedTextFile parses a delimited text file into a data object.
+// The only assumption made is that the first row contains variable names.
+// No checking or normalisation is done; duplicate variable names *will* cause problems.
+function parseDelimitedTextFile(url, delimiter, lineSeparator, callback) {
+	fetchFile(url, lineSeparator, function(data) {
+		const headers = data[0].split(delimiter);
+		let results = [];
+		for (let i = 1; i < data.length; i++) {
+			let row = data[i].split(delimiter);
+			let result = {};
+			for (let j = 0; j < row.length; j++) {
+				if (row[j]) {
+					result[headers[j]] = row[j];
+				}
+			}
+			if (Object.keys(result).length > 0) {
+				results.push(result);
+			}
+		}
+		callback(results);
+	});
+}
 
-function parseTSV(url, callback) {
-	fetchFile(url, function(data) {
 
-		let headers = normaliseHeaders(data[0]);
-		let entries = {};
+// delimitedTextToGeoJSON parses a delimited text file into GeoJSON,
+// assuming that it can find `x` and `y` fields to assemble coordinates from.
+// does not do any reprojecting or validating of coordinates, so output is
+// assumed to be EPSG:4326 by default
+function delimitedTextToGeoJSON(url, delimiter, lineSeparator, callback) {
+	fetchFile(url, lineSeparator, function(data) {
+
+		let headers = normaliseHeaders(data[0], delimiter);
 
 		const gj = { type: 'FeatureCollection', features: [] };
 
 		for (let i = 1; i < data.length; i++) {
-			let row = data[i].split('\t');
+			let row = data[i].split(delimiter);
 			const feature = {
 				type: 'Feature',
 				geometry: {
