@@ -423,12 +423,14 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer=true) {
 		if (sourceID === 'state-school-districts') {
 			showSchoolDistricts = true;
 			showESCRegions = false;
+			document.getElementById('esc-regions-control').selectedIndex = 0;
 			showHideLayer('esc-regions-lines', markerNames=['esc_regions'], showOnly=false, hideOnly=true);
 			filterStates.district.field = 'NAME';
 		}
 		if (sourceID === 'esc-regions') {
 			showESCRegions = true;
 			showSchoolDistricts = false;
+			document.getElementById('school-districts-control').selectedIndex = 0;
 			showHideLayer('state-school-districts-lines', markerNames=['state_school_districts'], showOnly=false, hideOnly=true);
 			filterStates.district.field = 'CITY';
 		}
