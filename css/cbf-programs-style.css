@@ -7,10 +7,6 @@
   overflow: hidden;
 }
 
-.hide-for-small {
-  display: block;
-}
-
 /* element styles */
 html, body {
   box-sizing: border-box;
@@ -124,8 +120,11 @@ img {
 }
 
 select {
-	max-width: 200px;
+  border: 1px solid #ccc;
 	overflow: hidden;
+  padding: 5px;
+  margin: 8px auto;
+  width: 100%;
 }
 
 .zoom {
@@ -223,11 +222,13 @@ ul{
 /* left sidebar / console */
 #console {
   background-color: #FFF;
+  box-shadow: #999 5px 0 5px -2px;
   display: flex;
   flex-direction: column;
-  flex: 0 0 240px;
+  flex: 0 0 275px;
   margin: 0px;
   overflow-y: auto;
+  z-index: 0;
 }
 
 .console-content {
@@ -238,11 +239,9 @@ ul{
   padding: 10px 20px;
 }
 
-.console-item {
-}
-
-.small-logo {
-  background: #fffff;
+.logo-container {
+  border: none;
+  padding: 0;
 }
 
 .style-logo {
@@ -261,14 +260,15 @@ ul{
 }
 
 .header {
-  color: #000;
+  color: #3D3935;
+;
   font-family: "Work Sans",Arial,Sans-serif;
   text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 20px;
-  margin-bottom: 10px;
-  margin-top:  0px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .header-dropdown {
@@ -295,189 +295,115 @@ p.header-explore {
 }
 
 .legend-title {
-	position:relative;
-	bottom:0;
-	right:0;
-    text-align: left;
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 	font-family: "Work Sans", helvetica, arial, sans-serif;
-    font-weight: 700;
+  font-weight: 700;
 	color:#2C2A29;
-    font-size: 90%;
+  font-size: 90%;
 	padding-bottom: 10px;
-    }
-  .legend .legend-scale ul {
-    margin: 0;
-    margin-bottom: 5px;
-    font-family: "Work Sans", helvetica, arial, sans-serif;
-    font-weight: 500;
-	padding: 0;
-    float: left;
-    list-style: none;
-    }
-  .legend .legend-scale ul li {
-    font-size: 13px;
-    list-style: none;
-    margin-left: 0;
-    line-height: 20px;
-    margin-bottom: 2px;
-    }
-  .legend ul.legend-labels li span {
-    display: block;
-    float: left;
-    height: 14px;
-    width: 24px;
-    margin-right: 5px;
-    margin-left: 0px;
-	margin-top: 3px;
-    border: 0px solid #999;
-    }
-  .legend ul.legend-labels li ul { /* to indent nested lists in the legend */
-  	margin-left: 1em;
-  }
+}
 
-	.inactive {
-		opacity: 0.2;
-	}
+.legend .legend-scale ul {
+  margin: 0;
+  margin-bottom: 5px;
+  font-family: "Work Sans", helvetica, arial, sans-serif;
+  font-weight: 500;
+  padding: 0;
+  list-style: none;
+  }
+.legend .legend-scale ul li {
+  display: flex;
+  font-size: 13px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  }
+.legend ul.legend-labels li span {
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  height: 14px;
+  width: 28px;
+  margin-right: 5px;
+  margin-left: 0px;
+  margin-top: 3px;
+}
+.legend ul.legend-labels li ul { /* to indent nested lists in the legend */
+	margin-left: 1em;
+}
+
+.inactive {
+	opacity: 0.2;
+}
 
 #raising_blended_learners
 {
-	background:url(../markers/raising_blended_learners_eye_2023.svg) left center;
-	width:28px;
-	height:12px;
-	display: block;
-	float: left;
+	background-image :url(../markers/raising_blended_learners_eye_2023.svg);
 }
+
 #raising_blended_learners_campuses
 {
-	background:url(../markers/raising_blended_learners_eye_2023.svg) left center;
-	width:28px;
-	height:14px;
-	display: block;
-	float: left;
+	background-image :url(../markers/raising_blended_learners_eye_2023.svg);
 }
+
 #charles_butt_scholars
 {
-	background:url(../markers/charles_butt_scholars_eye_2023.svg) left center;
-	width:28px;
-	height:14px;
-	display: block;
-	float: left;
+	background-image :url(../markers/charles_butt_scholars_eye_2023.svg);
 }
-#charles_butt_scholars_icon
-{
-	background:url(../markers/charles_butt_scholars_circle.svg) left center;
-	width: 14px;
-	height: 14px;
-	display: block;
-	float: left;
-	background-position: right;
-}
+
 #raising_texas_teachers
 {
-	background:url(../markers/raising_texas_teachers_eye_2023.svg) left center;
-	width:28px;
-	height:14px;
-	display: block;
-	float: left;
+	background-image :url(../markers/raising_texas_teachers_eye_2023.svg);
 }
-#raising_texas_teachers_icon
-{
-	background:url(../markers/raising_texas_teachers_eye_2023.svg) left center;
-	width:14px;
-	height:14px;
-	display: block;
-	float: left;
-	background-position: right;
-}
+
 #raising_school_leaders
 {
-	background:url(../markers/raising_school_leaders_eye_2023.svg) left center;
-	width:28px;
-	height:14px;
-	display: block;
-	float: left;
+	background-image :url(../markers/raising_school_leaders_eye_2023.svg);
 }
+
 #districts_of_innovation
 {
-	background:url(../markers/districts_of_innovation.svg) left center;
-	width:14px;
-	height:14px;
-	display: block;
-	float: left;
+	background-image :url(../markers/districts_of_innovation.svg);
 }
 #districts_of_innovation_poly
 {
-	background:url(../markers/districts_of_innovation_poly.svg) left center;
-	width:11px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/districts_of_innovation_poly.svg);
 }
 #texas_school_districts
 {
-	background:url(../markers/texas_school_districts.svg) left center;
-	width:11px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/texas_school_districts.svg);
 }
 #state_house_districts
 {
-	background:url(../markers/state_house_districts.svg) left center;
-	width:11px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/state_house_districts.svg);
 }
 #state_senate_districts
 {
-	background:url(../markers/state_senate_districts.svg) left center;
-	width:11px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/state_senate_districts.svg);
 }
 #state_school_districts
 {
-	background:url(../markers/state_school_districts.svg) left center;
-	width:11px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/state_school_districts.svg);
 }
 #esc_regions
 {
-	background:url(../markers/esc_regions.svg) left center;
-	width:11px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/esc_regions.svg);
 }
 #alumni_markers
 {
-	background:url(../markers/alumni.svg) left center;
-	width:14px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/alumni.svg);
 }
 #active_markers
 {
-	background:url(../markers/active.svg) left center;
-	width:14px;
-	height:16px;
-	display: block;
-	float: left;
+	background-image :url(../markers/active.svg);
 }
 
 #texas_icon
 {
-	background:url(../images/texas.svg) left center;
+	background-image :url(../images/texas.svg);
 	width:26px;
 	height:22px;
-	display: block;
-	float: left;
+  display: inline-block;
+  vertical-align: top;
 }
 
   .legend .legend-source {
@@ -748,8 +674,7 @@ input#slider {
 
 div#sliderbar {
 	text-align: center;
-	clear: both;
-	padding-top: 24px;
+	padding-top: 12px;
 }
 
 div#slidercontrols{
@@ -777,19 +702,8 @@ span#slider_stop {
 	display: none;
 }
 
-
 .no-scroll {
   overflow: hidden;
-}
-
-.hide-for-small {
-	display: block;
-  color: #000;
-  font-family: "Work Sans",Arial,Sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 20px;
-  margin-bottom: 10px;
 }
 
 .version-text {
@@ -803,4 +717,8 @@ span#slider_stop {
   font-style: italic;
   font-size: 9px;
   color: #505050;
+}
+
+.map-credit {
+  font-size: 13px;
 }
