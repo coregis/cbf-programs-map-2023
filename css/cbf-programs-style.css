@@ -219,11 +219,13 @@ ul{
 /* left sidebar / console */
 #console {
   background-color: #FFF;
+  box-shadow: #999 5px 0 5px -2px;
   display: flex;
   flex-direction: column;
-  flex: 0 0 240px;
+  flex: 0 0 275px;
   margin: 0px;
   overflow-y: auto;
+  z-index: 0;
 }
 
 .console-content {
@@ -234,11 +236,9 @@ ul{
   padding: 10px 20px;
 }
 
-.console-item {
-}
-
-.small-logo {
-  background: #fffff;
+.logo-container {
+  border: none;
+  padding: 0;
 }
 
 .style-logo {
@@ -257,14 +257,15 @@ ul{
 }
 
 .header {
-  color: #000;
+  color: #3D3935;
+;
   font-family: "Work Sans",Arial,Sans-serif;
   text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 20px;
-  margin-bottom: 10px;
-  margin-top:  0px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .header-dropdown {
