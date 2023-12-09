@@ -37,18 +37,6 @@ var loadedPolygonLayers = [];
 
 
 
-map.on('click', 'school_house_senate_districts_UNION-poly', function (e) {
-	var pointFeatures = map.queryRenderedFeatures(e.point, {layers: loadedPointLayerNames});
-	if (pointFeatures.length === 0) {
-		popup = new mapboxgl.Popup()
-			.setLngLat(e.lngLat)
-			.setHTML(fillpopup(e.features[0].properties))
-			.addTo(map);
-	}
-	popupYear = 0;
-});
-
-
 
 /*
 // make appropriate legend entry visible, and remove whichever zoom-to-districts dropdown we're not going to be using
