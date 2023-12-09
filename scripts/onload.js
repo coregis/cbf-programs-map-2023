@@ -85,16 +85,6 @@ for (let i = 0; i < coll.length; i++) {
 
 
 
-// Change the cursor to a pointer when the mouse is over the house districts layer.
-map.on('mouseenter', 'school_house_senate_districts_UNION-poly', function () {
-	map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'school_house_senate_districts_UNION-poly', function () {
-	map.getCanvas().style.cursor = '';
-});
-
 
 
 /*
