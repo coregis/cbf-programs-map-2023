@@ -61,11 +61,9 @@ ready(function() {
 });
 
 // zoom to a district if request in the URL parameters
-console.log(urlParams);
 if (urlParams["zoomto"]) {
 	filterStates.district.val = decodeURIComponent(urlParams["zoomto"]);
 }
-console.log(filterStates);
 
 
 
