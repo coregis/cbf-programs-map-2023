@@ -258,7 +258,7 @@ map.on('load', function () {
 		{
 			'sourceName': 'school_house_senate_districts_UNION',
 			'sourceID': 'school_house_senate_districts_UNION',
-			'sourceURL': 'mapbox://core-gis.a81c8ecf',
+			'sourceURL': 'mapbox://web-charlesbuttfdn.9oviqxay',
 			'displayBehind': 'districts-of-innovation-points',
 			'polygonLayerName': 'school_house_senate_districts_UNION-poly',
 			'polygonFillColor': 'rgba(200, 100, 240, 0)',
