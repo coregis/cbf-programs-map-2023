@@ -233,6 +233,7 @@ map.on('load', function () {
 			'usedInZoomControl': true
 		}
 	);
+	
 // ESC = Educational Service Centers
 	addVectorLayer(
 		map,
@@ -241,7 +242,7 @@ map.on('load', function () {
 			'sourceID': 'ESC_Regions-6oqjhv',
 			'sourceURL': 'mapbox://web-charlesbuttfdn.30mozefe',
 			'lineLayerName': 'esc-regions-lines',
-			'lineColor': 'rgba(61, 57, 53, 0.7)',
+			'lineColor': 'rgba(61, 57, 53, 0.3)',
 			'legendID': 'esc_regions',
 			'displayBehind': 'raising-school-leaders-points',
 			'polygonLayerName': 'esc-regions-poly',
