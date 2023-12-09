@@ -233,7 +233,7 @@ map.on('load', function () {
 			'usedInZoomControl': true
 		}
 	);
-	
+
 // ESC = Educational Service Centers
 	addVectorLayer(
 		map,
@@ -257,7 +257,7 @@ map.on('load', function () {
 		map,
 		{
 			'sourceName': 'school_house_senate_districts_UNION',
-			'sourceID': 'school_house_senate_districts_UNION',
+			'sourceID': 'school_house_senate_districts-dpf66q',
 			'sourceURL': 'mapbox://web-charlesbuttfdn.9oviqxay',
 			'displayBehind': 'districts-of-innovation-points',
 			'polygonLayerName': 'school_house_senate_districts_UNION-poly',
