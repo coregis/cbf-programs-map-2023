@@ -37,18 +37,6 @@ var loadedPolygonLayers = [];
 
 
 
-map.on('click', 'school_house_senate_districts_UNION-poly', function (e) {
-	var pointFeatures = map.queryRenderedFeatures(e.point, {layers: loadedPointLayerNames});
-	if (pointFeatures.length === 0) {
-		popup = new mapboxgl.Popup()
-			.setLngLat(e.lngLat)
-			.setHTML(fillpopup(e.features[0].properties))
-			.addTo(map);
-	}
-	popupYear = 0;
-});
-
-
 
 /*
 // make appropriate legend entry visible, and remove whichever zoom-to-districts dropdown we're not going to be using
@@ -96,16 +84,6 @@ for (let i = 0; i < coll.length; i++) {
 }
 
 
-
-// Change the cursor to a pointer when the mouse is over the house districts layer.
-map.on('mouseenter', 'school_house_senate_districts_UNION-poly', function () {
-	map.getCanvas().style.cursor = 'pointer';
-});
-
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'school_house_senate_districts_UNION-poly', function () {
-	map.getCanvas().style.cursor = '';
-});
 
 
 
@@ -233,6 +211,7 @@ map.on('load', function () {
 			'usedInZoomControl': true
 		}
 	);
+
 // ESC = Educational Service Centers
 	addVectorLayer(
 		map,
@@ -241,7 +220,7 @@ map.on('load', function () {
 			'sourceID': 'ESC_Regions-6oqjhv',
 			'sourceURL': 'mapbox://web-charlesbuttfdn.30mozefe',
 			'lineLayerName': 'esc-regions-lines',
-			'lineColor': 'rgba(61, 57, 53, 0.7)',
+			'lineColor': 'rgba(61, 57, 53, 0.3)',
 			'legendID': 'esc_regions',
 			'displayBehind': 'raising-school-leaders-points',
 			'polygonLayerName': 'esc-regions-poly',
@@ -256,8 +235,8 @@ map.on('load', function () {
 		map,
 		{
 			'sourceName': 'school_house_senate_districts_UNION',
-			'sourceID': 'school_house_senate_districts_UNION',
-			'sourceURL': 'mapbox://core-gis.a81c8ecf',
+			'sourceID': 'school_house_senate_districts-dpf66q',
+			'sourceURL': 'mapbox://web-charlesbuttfdn.9oviqxay',
 			'displayBehind': 'districts-of-innovation-points',
 			'polygonLayerName': 'school_house_senate_districts_UNION-poly',
 			'polygonFillColor': 'rgba(200, 100, 240, 0)',
