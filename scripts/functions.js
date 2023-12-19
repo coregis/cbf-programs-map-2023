@@ -535,15 +535,10 @@ function updateStatsBox() {
 		}
 		document.getElementById("stats.year").innerText = filterStates.year;
 		for (let i in loadedPointLayers) {
-			if (loadedPointLayers[i][0].includes("raising-blended-learners")) {
-				f = ['<', 'year', (filterStates.year + 4).toString()];
-			} else {
-				f = ['==', 'year', filterStates.year.toString()];
-			}
 			pointsInDistrict = getUniqueFeatures(
 				map.queryRenderedFeatures( {
 					layers: [loadedPointLayers[i][0]],
-					filter: f
+					filter: ['<=', 'year', filterStates.year.toString()]
 				} ),
 				"unique_id"
 			);
