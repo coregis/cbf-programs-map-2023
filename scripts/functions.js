@@ -189,28 +189,37 @@ function populateZoomControl(selectID, sourceID, fieldName, layerName, districtT
 
 
 function findDistrictBySubstring(districtType, prompt) {
+	// first check for a complete match
 	if (districtBBOXes[districtType][prompt]) {
 		return prompt;
-	} else if (districtBBOXes[districtType][prompt + " ISD"]) {
-		return prompt + " ISD";
-	} else {
-		const keys = Object.keys(districtBBOXes[districtType]);
-		let matches = [];
-		keys.forEach(function(key) {
-			if (key.indexOf(prompt) !== -1) {
-				matches.push(key);
-			}
-		});
-		if (matches.length === 1) {
-			return matches[0];
+	}
+
+	// then check common suffixes
+	const suffixes = [" ISD", " CSD", " Cons CSD", " Cons ISD"];
+	for (let i in suffixes) {
+		if (districtBBOXes[districtType][prompt + suffixes[i]]) {
+			return prompt + suffixes[i];
 		}
 	}
+
+	// then try for substrings, but only return if there's a unique match
+	const keys = Object.keys(districtBBOXes[districtType]);
+	let matches = [];
+	keys.forEach(function(key) {
+		if (key.indexOf(prompt) !== -1) {
+			matches.push(key);
+		}
+	});
+	if (matches.length === 1) {
+		return matches[0];
+	}
+
+	// if none of the above worked, tell the calling function that
 	return false;
 }
 
 function textZoomHandler(districtType, sourceID, fieldName, val) {
 	if (val.length > 2) {
-		val = val.trim();
 		const districtName = findDistrictBySubstring(districtType, val.trim());
 		if (districtName) {
 			zoomToPolygon(
