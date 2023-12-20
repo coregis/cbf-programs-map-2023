@@ -187,14 +187,28 @@ function populateZoomControl(selectID, sourceID, fieldName, layerName, districtT
 	}
 }
 
+function zoomToDistrict(districtType, sourceID, fieldName, districtName) {
+	if (districtBBOXes[districtType][districtName]) {
+		zoomToPolygon(
+			sourceID,
+			districtBBOXes[districtType][districtName].toString() + ',' + districtName,
+			fieldName
+		);
+		return true;
+	}
+	return false;
+}
+
 function textZoomHandler(districtType, sourceID, fieldName, val) {
 	if (val.length > 2) {
-		if (districtBBOXes[districtType][val]) {
-			zoomToPolygon(
-				sourceID,
-				districtBBOXes[districtType][val].toString() + ',' + val,
-				fieldName
-			);
+		val = val.trim();
+		if (zoomToDistrict(districtType, sourceID, fieldName, val)) {
+			return;
+		}
+		if (!val.endsWith("ISD")) {
+			if (zoomToDistrict(districtType, sourceID, fieldName, val + " ISD")) {
+				return;
+			}
 		}
 	}
 }
