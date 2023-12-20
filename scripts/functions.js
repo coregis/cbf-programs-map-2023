@@ -220,7 +220,10 @@ function findDistrictBySubstring(districtType, prompt) {
 
 function textZoomHandler(districtType, sourceID, fieldName, val) {
 	if (val.length > 2) {
-		const districtName = findDistrictBySubstring(districtType, val.trim());
+		const districtName = findDistrictBySubstring(
+			districtType,
+			val.trim().replace(/\b\w/g, s => s.toUpperCase()) // title-case
+		);
 		if (districtName) {
 			zoomToPolygon(
 				sourceID,
