@@ -90,6 +90,8 @@
 
 			<!--Drop down controls-->
 
+			<input id="school-districts-text-entry" name="school-districts-text-entry" type="text" placeholder="enter ISD name" oninput="textZoomHandler('isd', 'state-school-districts', 'NAME', this.value);" />
+
 			<select id="school-districts-control" onchange="zoomToPolygon('state-school-districts', this.value, 'NAME');"></select>
 
 			<select id="esc-regions-control" onchange="zoomToPolygon('esc-regions', this.value, 'CITY');"></select>
