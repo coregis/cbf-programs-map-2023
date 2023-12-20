@@ -187,14 +187,12 @@ function populateZoomControl(selectID, sourceID, fieldName, layerName, districtT
 	}
 }
 
-function zoomToDistrict(districtType, sourceID, fieldName, districtName) {
-	if (districtBBOXes[districtType][districtName]) {
-		zoomToPolygon(
-			sourceID,
-			districtBBOXes[districtType][districtName].toString() + ',' + districtName,
-			fieldName
-		);
-		return true;
+
+function findDistrictBySubstring(districtType, prompt) {
+	if (districtBBOXes[districtType][prompt]) {
+		return prompt;
+	} else if (districtBBOXes[districtType][prompt + " ISD"]) {
+		return prompt + " ISD";
 	}
 	return false;
 }
@@ -202,13 +200,13 @@ function zoomToDistrict(districtType, sourceID, fieldName, districtName) {
 function textZoomHandler(districtType, sourceID, fieldName, val) {
 	if (val.length > 2) {
 		val = val.trim();
-		if (zoomToDistrict(districtType, sourceID, fieldName, val)) {
-			return;
-		}
-		if (!val.endsWith("ISD")) {
-			if (zoomToDistrict(districtType, sourceID, fieldName, val + " ISD")) {
-				return;
-			}
+		const districtName = findDistrictBySubstring(districtType, val.trim());
+		if (districtName) {
+			zoomToPolygon(
+				sourceID,
+				districtBBOXes[districtType][districtName].toString() + ',' + districtName,
+				fieldName
+			);
 		}
 	}
 }
