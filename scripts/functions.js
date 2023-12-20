@@ -193,6 +193,17 @@ function findDistrictBySubstring(districtType, prompt) {
 		return prompt;
 	} else if (districtBBOXes[districtType][prompt + " ISD"]) {
 		return prompt + " ISD";
+	} else {
+		const keys = Object.keys(districtBBOXes[districtType]);
+		let matches = [];
+		keys.forEach(function(key) {
+			if (key.indexOf(prompt) !== -1) {
+				matches.push(key);
+			}
+		});
+		if (matches.length === 1) {
+			return matches[0];
+		}
 	}
 	return false;
 }
