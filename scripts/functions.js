@@ -18,6 +18,9 @@ var popupYear = 0;
 // assign all new popups to this variable so we can remove them as needed
 var popup;
 
+// global to support free text entry zoom controls
+var districtBBOXes = {};
+
 // assemble list of ISDs to filter by to get an ESC
 const ESC_ISD_LUT = 'data/tbl_school_districts_ESC_regions_LUT.csv'
 var ESC_ISD_list = {};
@@ -161,6 +164,9 @@ function populateZoomControl(selectID, sourceID, fieldName, layerName, districtT
 	polygons = getPolygons(sourceID, fieldName);
 	var select = document.getElementById(selectID);
 	select.options[0] = new Option(layerName, "-108,25,-88,37,0");
+	if (!(districtType in districtBBOXes)) {
+		districtBBOXes[districtType] = {};
+	}
 	for (let i in polygons) {
 		select.options[select.options.length] = new Option(
 			polygons[i].name,
@@ -171,12 +177,60 @@ function populateZoomControl(selectID, sourceID, fieldName, layerName, districtT
 				zoomToPolygon(sourceID, polygons[i].bbox.toString() + ',' + polygons[i].name, fieldName);
 			}
 		}
+		districtBBOXes[districtType][polygons[i].name] = polygons[i].bbox;
 	}
 	if (hideMaskLayer) {
 		map.setLayoutProperty(sourceID + '-poly', 'visibility', 'none');
 	// IMPORTANT: these paint properties define the appearance of the mask layer that deemphasises districts outside the one we've zoomed to.  They will overrule anything that's set when that mask layer was loaded.
 		map.setPaintProperty(sourceID + '-poly', 'fill-color', 'rgba(200, 200, 200, 0.7)');
 		map.setPaintProperty(sourceID + '-poly', 'fill-outline-color', 'rgba(200, 200, 200, 0.1)');
+	}
+}
+
+
+function findDistrictBySubstring(districtType, prompt) {
+	// first check for a complete match
+	if (districtBBOXes[districtType][prompt]) {
+		return prompt;
+	}
+
+	// then check common suffixes
+	const suffixes = [" ISD", " CSD", " Cons CSD", " Cons ISD"];
+	for (let i in suffixes) {
+		if (districtBBOXes[districtType][prompt + suffixes[i]]) {
+			return prompt + suffixes[i];
+		}
+	}
+
+	// then try for substrings, but only return if there's a unique match
+	const keys = Object.keys(districtBBOXes[districtType]);
+	let matches = [];
+	keys.forEach(function(key) {
+		if (key.indexOf(prompt) !== -1) {
+			matches.push(key);
+		}
+	});
+	if (matches.length === 1) {
+		return matches[0];
+	}
+
+	// if none of the above worked, tell the calling function that
+	return false;
+}
+
+function textZoomHandler(districtType, sourceID, fieldName, val) {
+	if (val.length > 2) {
+		const districtName = findDistrictBySubstring(
+			districtType,
+			val.trim().replace(/\b\w/g, s => s.toUpperCase()) // title-case
+		);
+		if (districtName) {
+			zoomToPolygon(
+				sourceID,
+				districtBBOXes[districtType][districtName].toString() + ',' + districtName,
+				fieldName
+			);
+		}
 	}
 }
 
