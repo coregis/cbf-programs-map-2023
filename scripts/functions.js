@@ -356,7 +356,7 @@ function setFilter(sourceID) {
 		}
 		if (filterStates.district && filterStates.district.val) {
 			// special handling for ESCs because each consists of multiple ISDs
-			if (filterStates.district.field === "CITY") {
+			if (filterStates.district.field === "REGION") {
 				filters.push(
 					["in", "school_district"].concat(
 						ESC_ISD_list[filterStates.district.val],
@@ -528,7 +528,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 				(showOnly = false),
 				(hideOnly = true),
 			);
-			filterStates.district.field = "CITY";
+			filterStates.district.field = "REGION";
 		}
 		coords = coords.split(",");
 		bbox = [
