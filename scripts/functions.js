@@ -195,7 +195,7 @@ function populateZoomControl(
 	for (let i in polygons) {
 		select.append(
 			new Option(
-				polygons[i].name,
+				polygons[i].name.replace(/^0+/, ''),
 				polygons[i].bbox.toString() + "," + polygons[i].name,
 			),
 		);
