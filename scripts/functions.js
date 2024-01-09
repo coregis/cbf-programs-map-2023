@@ -637,7 +637,10 @@ function updateStatsBox() {
 	if (filterStates.district && filterStates.district.val) {
 		// only do anything if we have a selected district
 		document.getElementById("statsBox").style.opacity = 1;
-		if (filterStates.district.field.indexOf("house") > -1) {
+		if (filterStates.district.field.indexOf("REGION") > -1) {
+			document.getElementById("stats.districtType").innerText =
+				"ESC Region";
+		} else if (filterStates.district.field.indexOf("house") > -1) {
 			document.getElementById("stats.districtType").innerText =
 				"House District";
 		} else if (filterStates.district.field.indexOf("senate") > -1) {
