@@ -304,7 +304,7 @@ map.on('mouseleave', 'raising-blended-learners-campuses-points', function () {
 	map.getCanvas().style.cursor = '';
 });
 
-map.on('zoomend', function() { updateStatsBox(); });
+map.on('idle', function() { updateStatsBox(); });
 
 function fillpopup_rbl(features){
 	let html = "";
