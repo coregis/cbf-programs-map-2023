@@ -26,7 +26,7 @@ const ESC_ISD_LUT = "data/tbl_school_districts_ESC_regions_LUT.csv";
 var ESC_ISD_list = {};
 parseDelimitedTextFile(ESC_ISD_LUT, ",", "\n", function (data) {
 	for (let i in data) {
-		let ESC = data[i]["ESC_CITY"];
+		let ESC = data[i]["ESC_REGION"];
 		if (ESC in ESC_ISD_list) {
 			ESC_ISD_list[ESC].push(data[i]["NAME"]);
 		} else {
@@ -152,7 +152,7 @@ function runWhenLoadComplete() {
 		populateZoomControl(
 			"esc-regions-control",
 			"esc-regions",
-			"CITY",
+			"REGION",
 			"Education Service Centers",
 			"esc",
 		);
@@ -603,7 +603,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 						} else if (loadedPolygonLayers[i][1] === "esc_regions") {
 							map.setFilter(loadedPolygonLayers[i][0], [
 								"!=",
-								"CITY",
+								"REGION",
 								coords[4],
 							]);
 						} else {
