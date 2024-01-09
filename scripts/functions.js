@@ -164,7 +164,7 @@ function runWhenLoadComplete() {
 			"isd",
 		);
 
-		new TomSelect("#school-districts-control", {hidePlaceholder: true});
+		new TomSelect("#school-districts-control", { hidePlaceholder: true });
 
 		// using a timeout here to stop this from running before the big Raising School Leaders layer has finished loading
 		setTimeout(function () {
@@ -227,54 +227,6 @@ function populateZoomControl(
 			"fill-outline-color",
 			"rgba(200, 200, 200, 0.1)",
 		);
-	}
-}
-
-function findDistrictBySubstring(districtType, prompt) {
-	// first check for a complete match
-	if (districtBBOXes[districtType][prompt]) {
-		return prompt;
-	}
-
-	// then check common suffixes
-	const suffixes = [" ISD", " CSD", " Cons CSD", " Cons ISD"];
-	for (let i in suffixes) {
-		if (districtBBOXes[districtType][prompt + suffixes[i]]) {
-			return prompt + suffixes[i];
-		}
-	}
-
-	// then try for substrings, but only return if there's a unique match
-	const keys = Object.keys(districtBBOXes[districtType]);
-	let matches = [];
-	keys.forEach(function (key) {
-		if (key.indexOf(prompt) !== -1) {
-			matches.push(key);
-		}
-	});
-	if (matches.length === 1) {
-		return matches[0];
-	}
-
-	// if none of the above worked, tell the calling function that
-	return false;
-}
-
-function textZoomHandler(districtType, sourceID, fieldName, val) {
-	if (val.length > 2) {
-		const districtName = findDistrictBySubstring(
-			districtType,
-			val.trim().replace(/\b\w/g, (s) => s.toUpperCase()), // title-case
-		);
-		if (districtName) {
-			zoomToPolygon(
-				sourceID,
-				districtBBOXes[districtType][districtName].toString() +
-					"," +
-					districtName,
-				fieldName,
-			);
-		}
 	}
 }
 
@@ -706,7 +658,7 @@ function updateStatsBox() {
 			pointsInDistrict = getUniqueFeatures(
 				map.queryRenderedFeatures({
 					layers: [loadedPointLayers[i][0]],
-					filter: ['<=', 'year', filterStates.year.toString()],
+					filter: ["<=", "year", filterStates.year.toString()],
 				}),
 				"unique_id",
 			);
