@@ -650,7 +650,7 @@ function updateStatsBox() {
 			document.getElementById("stats.districtType").innerText = "";
 		}
 		document.getElementById("stats.districtName").innerText =
-			decodeURIComponent(filterStates.district.val);
+			decodeURIComponent(filterStates.district.val).replace(/^0+/, '');
 		if (filterStates.district.field.indexOf("CITY") > -1) {
 			document.getElementById("stats.districtSuffix").innerText = " ESC";
 		} else {
