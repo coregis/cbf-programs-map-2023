@@ -164,7 +164,7 @@ function runWhenLoadComplete() {
 			"isd",
 		);
 
-		new TomSelect("#school-districts-control", { hidePlaceholder: true });
+		new TomSelect("#school-districts-control", { hidePlaceholder: true, maxOptions: null });
 
 		// using a timeout here to stop this from running before the big Raising School Leaders layer has finished loading
 		setTimeout(function () {
