@@ -503,7 +503,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 		// reset dropdowns as appropriate
 		if (sourceID !== "state-school-districts") {
 			showSchoolDistricts = false;
-			document.getElementById("school-districts-control").selectedIndex = 0;
+			document.getElementById("school-districts-control").tomselect.clear(true);
 		}
 		if (sourceID !== "esc-regions") {
 			showESCRegions = false;
