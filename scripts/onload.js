@@ -38,35 +38,6 @@ var loadedPolygonLayers = [];
 
 
 
-/*
-// make appropriate legend entry visible, and remove whichever zoom-to-districts dropdown we're not going to be using
-if (showHouseDistricts) {
-	document.getElementById("house_districts_legend_entry").style.display = "inline";
-	document.getElementById("switch-from-house-districts").style.display = "block";
-	document.getElementById("house-district-reference").style.display = "inline";
-} else {
-	removeElement("house-districts-control"); // the dropdown menu
-}
-if (showSenateDistricts) {
-	document.getElementById("senate_districts_legend_entry").style.display = "inline";
-	document.getElementById("switch-from-senate-districts").style.display = "block";
-	document.getElementById("senate-district-reference").style.display = "inline";
-} else {
-	removeElement("senate-districts-control");
-}
-if (showSchoolDistricts) {
-	document.getElementById("school_districts_legend_entry").style.display = "inline";
-	document.getElementById("switch-from-school-districts").style.display = "block";
-	document.getElementById("school-district-reference").style.display = "inline";
-} else {
-	removeElement("school-districts-control");
-}
-*/
-
-
-
-
-
 
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -153,47 +124,6 @@ map.on('load', function () {
 		}
 	);
 
-/* commenting out legislative districts as we probably won't use them in this map
-	if (showSenateDistricts) {
-		addVectorLayer(
-			map,
-			{
-				'sourceName': 'state-senate-districts', // data source name for internal use
-				'sourceID': 'state_senate_districts-0g2odu', // name of the Mapbox layer from which the data will be loaded
-				'sourceURL': 'mapbox://core-gis.b2eu90mx', // Mapbox URL
-				'lineLayerName': 'state-senate-districts-lines', // OPTIONAL name we'll use for the layer that shows the outlines. Leave out or set to false if you don't want outlines displayed.
-				'lineColor': '#a1b082', // colour to draw those outlines with; safe to leave out if we're not drawing outlines, but must be explicitly set if we are
-				'legendID': 'state_senate_districts', // OPTIONAL: the id in the legend, so we can set it to active or inactive as appropriate. Simply leave out for layers that don't appear in the legend
-				'displayBehind': 'raising-school-leaders-points', // ID of another existing layer, which Mapbox will make sure this one gets drawn behind
-				'polygonLayerName': 'state-senate-districts-poly', // OPTIONAL name we'll use for the layer that invisibly stores the polygon extents. Needed if we're either going to add this layer to either the zoom to districts control or set click events (e.g. popups) on it.	Leave out or set to false if you don't want one.
-				'polygonFillColor': 'rgba(200, 100, 240, 0)', // colour to fill polygons with. Needed if there's going to be a polygon layer; simply leave out if not.
-				'polygonOutlineColor': 'rgba(200, 100, 240, 0)', // colour to draw polygon boundaries with. Needed if there's going to be a polygon layer; simply leave out if not.
-				'visibleOnLoad': true, // set this optional argument to true to have the layer visible on load. Leave out or set to false to have it hidden on load
-				'usedInZoomControl': true // set this optional argument to true if this layer will be used in the Zoom to Districts control, otherwise leave it out or set it to false.
-			}
-		);
-	}
-
-	if (showHouseDistricts) {
-		addVectorLayer(
-			map,
-			{
-				'sourceName': 'state-house-districts',
-				'sourceID': 'state_house_districts_v2-aws8ea',
-				'sourceURL': 'mapbox://core-gis.14zlmi2o',
-				'lineLayerName': 'state-house-districts-lines',
-				'lineColor': 'rgba(117, 137, 77, 0.5)',
-				'legendID': 'state_house_districts',
-				'displayBehind': 'raising-school-leaders-points',
-				'polygonLayerName': 'state-house-districts-poly',
-				'polygonFillColor': 'rgba(200, 100, 240, 0)', // IMPORTANT: the polygon fill and outline colours for House and Senate districts will be overridden by the populateZoomControl() function, so edit them there.  Here the important thing is to keep the alpha value at 0 so that the layer won't appear to blink on and off during the loading process.
-				'polygonOutlineColor': 'rgba(200, 100, 240, 0)',
-				'visibleOnLoad': true,
-				'usedInZoomControl': true
-			}
-		);
-	}
-*/
 	addVectorLayer(
 		map,
 		{
