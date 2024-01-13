@@ -26,7 +26,7 @@ const ESC_ISD_LUT = "data/tbl_school_districts_ESC_regions_LUT.csv";
 var ESC_ISD_list = {};
 parseDelimitedTextFile(ESC_ISD_LUT, ",", "\n", function (data) {
 	for (let i in data) {
-		let ESC = data[i]["ESC_CITY"];
+		let ESC = data[i]["ESC_REGION"];
 		if (ESC in ESC_ISD_list) {
 			ESC_ISD_list[ESC].push(data[i]["NAME"]);
 		} else {
@@ -152,7 +152,7 @@ function runWhenLoadComplete() {
 		populateZoomControl(
 			"esc-regions-control",
 			"esc-regions",
-			"CITY",
+			"REGION",
 			"Education Service Centers",
 			"esc",
 		);
@@ -164,7 +164,7 @@ function runWhenLoadComplete() {
 			"isd",
 		);
 
-		new TomSelect("#school-districts-control", { hidePlaceholder: true });
+		new TomSelect("#school-districts-control", { hidePlaceholder: true, maxOptions: null });
 
 		// using a timeout here to stop this from running before the big Raising School Leaders layer has finished loading
 		setTimeout(function () {
@@ -195,7 +195,7 @@ function populateZoomControl(
 	for (let i in polygons) {
 		select.append(
 			new Option(
-				polygons[i].name,
+				polygons[i].name.replace(/^0+/, ''),
 				polygons[i].bbox.toString() + "," + polygons[i].name,
 			),
 		);
@@ -356,7 +356,7 @@ function setFilter(sourceID) {
 		}
 		if (filterStates.district && filterStates.district.val) {
 			// special handling for ESCs because each consists of multiple ISDs
-			if (filterStates.district.field === "CITY") {
+			if (filterStates.district.field === "REGION") {
 				filters.push(
 					["in", "school_district"].concat(
 						ESC_ISD_list[filterStates.district.val],
@@ -503,7 +503,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 		// reset dropdowns as appropriate
 		if (sourceID !== "state-school-districts") {
 			showSchoolDistricts = false;
-			document.getElementById("school-districts-control").selectedIndex = 0;
+			document.getElementById("school-districts-control").tomselect.clear(true);
 		}
 		if (sourceID !== "esc-regions") {
 			showESCRegions = false;
@@ -528,7 +528,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 				(showOnly = false),
 				(hideOnly = true),
 			);
-			filterStates.district.field = "CITY";
+			filterStates.district.field = "REGION";
 		}
 		coords = coords.split(",");
 		bbox = [
@@ -603,7 +603,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 						} else if (loadedPolygonLayers[i][1] === "esc_regions") {
 							map.setFilter(loadedPolygonLayers[i][0], [
 								"!=",
-								"CITY",
+								"REGION",
 								coords[4],
 							]);
 						} else {
@@ -637,7 +637,10 @@ function updateStatsBox() {
 	if (filterStates.district && filterStates.district.val) {
 		// only do anything if we have a selected district
 		document.getElementById("statsBox").style.opacity = 1;
-		if (filterStates.district.field.indexOf("house") > -1) {
+		if (filterStates.district.field.indexOf("REGION") > -1) {
+			document.getElementById("stats.districtType").innerText =
+				"ESC Region";
+		} else if (filterStates.district.field.indexOf("house") > -1) {
 			document.getElementById("stats.districtType").innerText =
 				"House District";
 		} else if (filterStates.district.field.indexOf("senate") > -1) {
@@ -647,7 +650,7 @@ function updateStatsBox() {
 			document.getElementById("stats.districtType").innerText = "";
 		}
 		document.getElementById("stats.districtName").innerText =
-			decodeURIComponent(filterStates.district.val);
+			decodeURIComponent(filterStates.district.val).replace(/^0+/, '');
 		if (filterStates.district.field.indexOf("CITY") > -1) {
 			document.getElementById("stats.districtSuffix").innerText = " ESC";
 		} else {
