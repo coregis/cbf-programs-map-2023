@@ -79,7 +79,7 @@ ready(function () {
 	}
 });
 
-// zoom to a district if request in the URL parameters
+// zoom to a district if requested in the URL parameters
 if (urlParams["zoomto"]) {
 	filterStates.district.val = decodeURIComponent(urlParams["zoomto"]);
 }
