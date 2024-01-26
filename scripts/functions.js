@@ -79,7 +79,7 @@ ready(function () {
 	}
 });
 
-// zoom to a district if request in the URL parameters
+// zoom to a district if requested in the URL parameters
 if (urlParams["zoomto"]) {
 	filterStates.district.val = decodeURIComponent(urlParams["zoomto"]);
 }
@@ -94,15 +94,17 @@ function showHideLayer(
 	if ((visibility === "visible" || hideOnly) && !showOnly) {
 		map.setLayoutProperty(layerName, "visibility", "none");
 		for (let i in markerNames) {
-			if (document.getElementById(markerNames[i]) !== null) {
-				document.getElementById(markerNames[i]).classList.add("inactive");
+			const markerSet = document.getElementById(markerNames[i]);
+			if (markerSet !== null) {
+				markerSet.classList.add("inactive");
 			}
 		}
 	} else {
 		map.setLayoutProperty(layerName, "visibility", "visible");
 		for (let i in markerNames) {
-			if (document.getElementById(markerNames[i]) !== null) {
-				document.getElementById(markerNames[i]).classList.remove("inactive");
+			const markerSet = document.getElementById(markerNames[i]);
+			if (markerSet !== null) {
+				markerSet.classList.remove("inactive");
 			}
 		}
 	}
@@ -499,11 +501,15 @@ window.addEventListener("popstate", function () {
 
 function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 	if (typeof coords !== "undefined") {
-		document.getElementById("statsBox").style.opacity = 0;
+		const statsBox = document.getElementById("statsBox");
+		statsBox.style.opacity = 0;
 		// reset dropdowns as appropriate
 		if (sourceID !== "state-school-districts") {
 			showSchoolDistricts = false;
-			document.getElementById("school-districts-control").tomselect.clear(true);
+			const ISDsControl = document.getElementById("school-districts-control");
+			if (ISDsControl.tomselect) {
+	 			ISDsControl.tomselect.clear(true);
+			}
 		}
 		if (sourceID !== "esc-regions") {
 			showESCRegions = false;
@@ -626,7 +632,7 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 					}
 				}
 				if (coords[4] === "0") {
-					document.getElementById("statsBox").style.opacity = 0;
+					statsBox.style.opacity = 0;
 				}
 			}, 1500);
 		}
@@ -634,27 +640,29 @@ function zoomToPolygon(sourceID, coords, filterField, maskLayer = true) {
 }
 
 function updateStatsBox() {
+	const statsBox = document.getElementById("statsBox");
 	if (filterStates.district && filterStates.district.val) {
 		// only do anything if we have a selected district
-		document.getElementById("statsBox").style.opacity = 1;
+		const districtTypeSpan = document.getElementById("stats.districtType");
+		const districtSuffixSpan = document.getElementById("stats.districtSuffix");
 		if (filterStates.district.field.indexOf("REGION") > -1) {
-			document.getElementById("stats.districtType").innerText =
+			districtTypeSpan.innerText =
 				"ESC Region";
 		} else if (filterStates.district.field.indexOf("house") > -1) {
-			document.getElementById("stats.districtType").innerText =
+			districtTypeSpan.innerText =
 				"House District";
 		} else if (filterStates.district.field.indexOf("senate") > -1) {
-			document.getElementById("stats.districtType").innerText =
+			districtTypeSpan.innerText =
 				"Senate District";
 		} else {
-			document.getElementById("stats.districtType").innerText = "";
+			districtTypeSpan.innerText = "";
 		}
 		document.getElementById("stats.districtName").innerText =
 			decodeURIComponent(filterStates.district.val).replace(/^0+/, '');
 		if (filterStates.district.field.indexOf("CITY") > -1) {
-			document.getElementById("stats.districtSuffix").innerText = " ESC";
+			districtSuffixSpan.innerText = " ESC";
 		} else {
-			document.getElementById("stats.districtSuffix").innerText = "";
+			districtSuffixSpan.innerText = "";
 		}
 		document.getElementById("stats.year").innerText = filterStates.year;
 		for (let i in loadedPointLayers) {
@@ -668,8 +676,9 @@ function updateStatsBox() {
 			counterID = "count." + loadedPointLayers[i][0];
 			document.getElementById(counterID).innerText = pointsInDistrict.length;
 		}
+		statsBox.style.opacity = 1;
 	} else {
-		document.getElementById("statsBox").style.opacity = 0;
+		statsBox.style.opacity = 0;
 	}
 }
 
@@ -711,14 +720,15 @@ function closeNav() {
 }
 
 function setVisibilityState(params) {
+	const legendElement = document.getElementById(params.legendID);
 	if (params.visibleOnLoad === undefined || params.visibleOnLoad === false) {
 		if (params.legendID !== undefined && params.legendID !== false) {
-			document.getElementById(params.legendID).classList.add("inactive");
+			legendElement.classList.add("inactive");
 		}
 		return "none";
 	} else {
 		if (params.legendID !== undefined && params.legendID !== false) {
-			document.getElementById(params.legendID).classList.remove("inactive");
+			legendElement.classList.remove("inactive");
 		}
 		return "visible";
 	}
