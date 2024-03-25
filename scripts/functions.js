@@ -931,6 +931,8 @@ function normaliseHeaders(row, delimiter) {
 				if (!xfield) {
 					headers[i] = "x";
 					xfield = true;
+				} else {
+					console.log("Caution: multiple potential X coordinate fields:", row)
 				}
 				break;
 			case "latitude":
@@ -939,7 +941,9 @@ function normaliseHeaders(row, delimiter) {
 			case "ycoord":
 				if (!yfield) {
 					headers[i] = "y";
-					yfield;
+					yfield = true;
+				} else {
+					console.log("Caution: multiple potential Y coordinate fields:", row)
 				}
 		}
 	}
