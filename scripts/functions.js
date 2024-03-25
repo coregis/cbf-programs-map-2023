@@ -928,7 +928,7 @@ function normaliseHeaders(row, delimiter) {
 			case "lon":
 			case "x":
 			case "xcoord":
-				if (not xfield) {
+				if (!xfield) {
 					headers[i] = "x";
 					xfield = true;
 				}
@@ -937,7 +937,7 @@ function normaliseHeaders(row, delimiter) {
 			case "lat":
 			case "y":
 			case "ycoord":
-				if (not yfield) {
+				if (!yfield) {
 					headers[i] = "y";
 					yfield;
 				}
