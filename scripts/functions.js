@@ -918,6 +918,8 @@ function compileUniqueArray(features, ignoreFields = []) {
 
 function normaliseHeaders(row, delimiter) {
 	let headers = row.split(delimiter);
+	let xfield = false;
+	let yfield = false;
 	for (let i in headers) {
 		switch (headers[i].toLowerCase()) {
 			case "longitude":
@@ -926,13 +928,19 @@ function normaliseHeaders(row, delimiter) {
 			case "lon":
 			case "x":
 			case "xcoord":
-				headers[i] = "x";
+				if (not xfield) {
+					headers[i] = "x";
+					xfield = true;
+				}
 				break;
 			case "latitude":
 			case "lat":
 			case "y":
 			case "ycoord":
-				headers[i] = "y";
+				if (not yfield) {
+					headers[i] = "y";
+					yfield;
+				}
 		}
 	}
 	return headers;
